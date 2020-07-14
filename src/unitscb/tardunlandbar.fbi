@@ -26,7 +26,7 @@
 	mogriumincome = 5;
 	mogriumstorage = 100;
 	name = Dunland Camp;
-	objectname = tarshirefac;
+	objectname = tardunlandbar;
 	radardistance = 750;
 	shadowgaf = shadows;
 	shootme = 1;
