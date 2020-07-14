@@ -1,0 +1,17 @@
+[tarmoria_dead]
+{
+	animatable = 1;
+	blocking = 0;
+	damage = 800;
+	decomposetime = 99999999999999999;
+	description = Goblin Corpse;
+	footprintx = 2;
+	footprintz = 2;
+	height = 0;
+	hitdensity = 100;
+	noshadow = 1;
+	object = tarmoria_dead;
+	reclaimable = 1;
+	resurrectable = 1;
+	world = All Worlds;
+}

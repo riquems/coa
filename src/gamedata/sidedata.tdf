@@ -1,0 +1,283 @@
+// Sidedata.tdf -- Basic definition of all the sides in the game
+// Copyright 1998 Humongous Entertainment Inc.
+
+[SIDE0]
+{
+	name=GONDOR;
+	nameprefix=ARA;
+	commander=araaragorn;
+	palette=ara_textures.pal;
+	buildpalette=arabipal.pcx;
+	buildsparklygaf=aramonbuild;
+	buildsparklyanim=aramonbuild;
+	resurrectsparklygaf=aramonbuild;
+	resurrectsparklyanim=aramonbuild;
+	nimbus=nimbus_aramon;
+	waterheight=40;
+	musictracks = 21 22 28 29 36 37;
+	logogaf=colorlogos2;
+	logoart=arateam;
+	FogColor = 255 255 255;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = ARAGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE1]
+{
+	name=ROHAN;
+	nameprefix=ARA;
+	commander=ARAGANDALF;
+	palette=ara_textures.pal;
+	buildpalette=arabipal.pcx;
+	buildsparklygaf=aramonbuild;
+	buildsparklyanim=aramonbuild;
+	resurrectsparklygaf=aramonbuild;
+	resurrectsparklyanim=aramonbuild;
+	nimbus=nimbus_aramon;
+	waterheight=40;
+	musictracks = 23 24 30 31 38 39;
+	logogaf=colorlogos2;
+	logoart=arateam;
+	FogColor = 255 255 255;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = ARAGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE2]
+{
+	name=GALADRIM;
+	nameprefix=ARA;
+	commander=araelrond;
+	palette=ara_textures.pal;
+	buildpalette=arabipal.pcx;
+	buildsparklygaf=aramonbuild;
+	buildsparklyanim=aramonbuild;
+	resurrectsparklygaf=aramonbuild;
+	resurrectsparklyanim=aramonbuild;
+	nimbus=nimbus_aramon;
+	waterheight=40;
+	musictracks = 25 26 32 33 40 41;
+	logogaf=colorlogos2;
+	logoart=arateam;
+	FogColor = 255 255 255;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = ARAGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE3]
+{
+	name=Erebor;
+	nameprefix=ARA;
+	commander=ARADAIN;
+	palette=ara_textures.pal;
+	buildpalette=arabipal.pcx;
+	buildsparklygaf=aramonbuild;
+	buildsparklyanim=aramonbuild;
+	resurrectsparklygaf=aramonbuild;
+	resurrectsparklyanim=aramonbuild;
+	nimbus=nimbus_aramon;
+	waterheight=40;
+	musictracks = 27 21 34 35 37 36;
+	logogaf=colorlogos2;
+	logoart=arateam;
+	FogColor = 255 255 255;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = ARAGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE4]
+{
+	name=LIFEFORMS;
+	nameprefix=LIF;
+	palette=lif_textures.pal;
+	buildpalette=arabipal.pcx;
+	buildsparklygaf=aramonbuild;
+	buildsparklyanim=aramonbuild;
+	resurrectsparklygaf=aramonbuild;
+	resurrectsparklyanim=aramonbuild;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE5]
+{
+	name=NONPLAYERCHARACTERS;
+	nameprefix=NPC;
+	palette=npc_textures.pal;
+	buildpalette=arabipal.pcx;
+	buildsparklygaf=aramonbuild;
+	buildsparklyanim=aramonbuild;
+	resurrectsparklygaf=aramonbuild;
+	resurrectsparklyanim=aramonbuild;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE6]
+{
+	name=WANDERING_MONSTERS;
+	nameprefix=MON;
+	palette=mon_textures.pal;
+	buildpalette=arabipal.pcx;
+	buildsparklygaf=aramonbuild;
+	buildsparklyanim=aramonbuild;
+	resurrectsparklygaf=aramonbuild;
+	resurrectsparklyanim=aramonbuild;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE7]
+{
+	name=MORDOR;
+	nameprefix=TAR;
+	commander=TARSAURON;
+	palette=tar_textures.pal;
+	buildpalette=tarbipal.pcx;
+	buildsparklygaf=tarosbuild;
+	buildsparklyanim=tarosbuild;
+	resurrectsparklygaf=tarosbuild;
+	resurrectsparklyanim=tarosbuild;
+	nimbus=nimbus_taros;
+	waterheight=58;
+	musictracks = 25 23 34 33 38 41;
+	logogaf=colorlogos2;
+	logoart=tarteam;
+	FogColor = 100 50 25;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = TARGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE8]
+{
+	name=ISENGARD;
+	nameprefix=TAR;
+	commander=TARSARUMAN;
+	palette=tar_textures.pal;
+	buildpalette=tarbipal.pcx;
+	buildsparklygaf=tarosbuild;
+	buildsparklyanim=tarosbuild;
+	resurrectsparklygaf=tarosbuild;
+	resurrectsparklyanim=tarosbuild;
+	nimbus=nimbus_taros;
+	waterheight=58;
+	musictracks = 23 22 29 34 36 40;
+	logogaf=colorlogos2;
+	logoart=tarteam;
+	FogColor = 100 50 25;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = TARGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE9]
+{
+	name=MORIA;
+	nameprefix=TAR;
+	commander=TARMORIAKING;
+	palette=tar_textures.pal;
+	buildpalette=tarbipal.pcx;
+	buildsparklygaf=tarosbuild;
+	buildsparklyanim=tarosbuild;
+	resurrectsparklygaf=tarosbuild;
+	resurrectsparklyanim=tarosbuild;
+	nimbus=nimbus_taros;
+	waterheight=58;
+	musictracks = 21 23 29 35 39 36;
+	logogaf=colorlogos2;
+	logoart=tarteam;
+	FogColor = 100 50 25;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = TARGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}
+
+[SIDE10]
+{
+	name=HARAD;
+	nameprefix=TAR;
+	commander=TARSOUTHRONKING;
+	palette=tar_textures.pal;
+	buildpalette=tarbipal.pcx;
+	buildsparklygaf=tarosbuild;
+	buildsparklyanim=tarosbuild;
+	resurrectsparklygaf=tarosbuild;
+	resurrectsparklyanim=tarosbuild;
+	nimbus=nimbus_taros;
+	waterheight=58;
+	musictracks = 26 23 32 28 41 39;
+	logogaf=colorlogos2;
+	logoart=tarteam;
+	FogColor = 100 50 25;
+	stonegaf = ara_stone;
+	stoneanim = basiliskstone;
+	frozengaf = araice;
+	frozenanim = creonice;
+
+	God = TARGOD;
+
+	underattack_sound = AlarmAra;
+	underattack_delay = 30;
+}

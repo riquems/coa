@@ -1,0 +1,16 @@
+[ararider_dead]
+{
+	animatable = 1;
+	blocking = 0;
+	damage = 1320;
+	decomposetime = 99999999999999999;
+	description = Rider Corpse;
+	footprintx = 3;
+	footprintz = 3;
+	height = 0;
+	noshadow = 1;
+	object = araknigh_dead;
+	reclaimable = 1;
+	resurrectable = 1;
+	world = All Worlds;
+}

@@ -1,0 +1,14 @@
+[aratower_dead]
+{
+	blocking = 1;
+	damage = 14860;
+	description = Debris;
+	featuredead = npcwreck3x3;
+	footprintx = 3;
+	footprintz = 3;
+	height = 20;
+	isbuilding = 1;
+	object = aratower_dead;
+	reclaimable = 1;
+	world = All Worlds;
+}

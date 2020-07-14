@@ -1,0 +1,31 @@
+#define TAK			// This is a TAK script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  TarWallTop, TarWallBase, Top;
+
+
+Create()
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+	return;
+}
+
+Dying()
+{
+	set MAGIC_DEATH to 1;
+	return;
+}
+
+Killed(severity, corpsetype, damagetype)
+{
+	explode TarWallTop type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+	explode TarWallBase type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+	explode Top type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+	corpsetype = 0;
+	return;
+}

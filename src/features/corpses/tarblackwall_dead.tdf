@@ -1,0 +1,14 @@
+[tarblackwall_dead]
+{
+	blocking = 0;
+	damage = 440;
+	description = Debris;
+	footprintx = 2;
+	footprintz = 2;
+	height = 0;
+	hitdensity = 100;
+	noshadow = 1;
+	object = crewall_dead;
+	reclaimable = 1;
+	world = All Worlds;
+}

@@ -1,0 +1,14 @@
+[arabuilding2_dead]
+{
+	blocking = 1;
+	damage = 18046;
+	description = Debris;
+	featuredead = npcwreck7x7;
+	footprintx = 5;
+	footprintz = 7;
+	height = 30;
+	isbuilding = 1;
+	object = arabuilding2_dead;
+	reclaimable = 1;
+	world = All Worlds;
+}

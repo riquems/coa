@@ -1,0 +1,18 @@
+[aragonwall]
+{
+	world=allworld;
+	description=Citadel Wall;
+	category=Wall;
+	object=aragonwall;
+	featuredead = npcwreck2x2;
+	footprintx=2;
+	footprintz=2;
+	height=55;
+	blocking=1;
+	hitdensity=5;
+	damage=30000;
+	reclaimable=0;
+	autoreclaimable=0;
+	isbuilding=1;
+	nodrawundergray=1;
+}

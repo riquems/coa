@@ -1,0 +1,2844 @@
+#define TAK			// This is a TAK script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  torso, emitjim, bloodl, bloodr, bloodm, Hip, LegUL, LegUR,
+       Head, ArmUL, ArmUR, ArmLR, HandR, ArmLL, HandL, LegLR,
+       LegLL, FootL, FootR, wakel, waker, hammer10, hammer, Torso5,
+       HammerEmit, Pole, LegLR5, LegLL5, Flag1, Flag2, Flag3, flagrot;
+
+static-var  moving, aiming, firing, building, busy_dying,
+            pause_loop, kill_attack, restored, legs_restored, direction,
+            vetlevel, winddir, restore_delay;
+
+// Signal definitions
+#define SIG_AIM				2
+#define SIG_MOVE			4
+#define SIG_WIND			8
+#define SIG_RESTORE			16
+
+
+walk()
+{
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to z-axis <7.000000> now;
+		turn LegUL to x-axis <-18.637363> now;
+		turn LegUL to z-axis <-7.000000> now;
+		turn LegUR to x-axis <-2.109890> now;
+		turn LegUR to z-axis <-7.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to z-axis <-11.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn ArmUL to x-axis <-3.000000> now;
+		turn ArmUL to z-axis <7.000000> now;
+		turn ArmUR to x-axis <-5.978022> now;
+		turn ArmLR to x-axis <-2.000000> now;
+		turn ArmLR to y-axis <-5.000000> now;
+		turn HandR to x-axis <39.730769> now;
+		turn ArmLL to x-axis <-95.021978> now;
+		turn ArmLL to z-axis <-10.000000> now;
+		turn HandL to x-axis <5.994505> now;
+		turn HandL to y-axis <-4.082418> now;
+		turn LegLR to x-axis <1.752747> now;
+		turn LegLL to x-axis <42.543956> now;
+		turn FootL to x-axis <-8.791209> now;
+		sleep 111;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-2.000000> now;
+		turn Hip to z-axis <4.000000> now;
+		turn LegUL to x-axis <-32.521978> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <8.087912> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn torso to x-axis <0.000000> now;
+		turn torso to y-axis <3.000000> now;
+		turn torso to z-axis <-7.000000> now;
+		turn Head to x-axis <0.000000> now;
+		turn Head to y-axis <-3.000000> now;
+		turn ArmUL to x-axis <0.000000> now;
+		turn ArmUL to z-axis <3.000000> now;
+		turn ArmUR to x-axis <-8.087912> now;
+		turn ArmUR to y-axis <2.000000> now;
+		turn ArmLR to x-axis <-11.549451> now;
+		turn HandR to x-axis <29.186813> now;
+		turn ArmLL to x-axis <-97.021978> now;
+		turn HandL to x-axis <7.049451> now;
+		turn HandL to y-axis <-1.269231> now;
+		turn LegLR to x-axis <2.813187> now;
+		turn FootR to x-axis <-11.956044> now;
+		turn LegLL to x-axis <32.000000> now;
+		turn FootL to x-axis <-1.934066> now;
+		sleep 116;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-4.000000> now;
+		turn Hip to z-axis <2.000000> now;
+		turn LegUL to x-axis <-45.098901> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <11.604396> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <9.109890> now;
+		turn torso to z-axis <-3.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <-7.000000> now;
+		turn ArmUL to x-axis <3.000000> now;
+		turn ArmUL to z-axis <1.000000> now;
+		turn ArmUR to x-axis <-9.142857> now;
+		turn ArmUR to y-axis <6.000000> now;
+		turn ArmLR to x-axis <-16.324176> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-100.021978> now;
+		turn HandL to x-axis <3.532967> now;
+		turn HandL to y-axis <-0.917582> now;
+		turn LegLR to x-axis <19.692308> now;
+		turn FootR to x-axis <-5.093407> now;
+		turn LegLL to x-axis <27.598901> now;
+		turn FootL to x-axis <-9.230769> now;
+		turn FootL to y-axis <2.000000> now;
+		sleep 126;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-7.000000> now;
+		turn Hip to z-axis <0.000000> now;
+		turn LegUL to x-axis <-40.434066> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <16.879121> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn torso to x-axis <9.000000> now;
+		turn torso to y-axis <11.351648> now;
+		turn torso to z-axis <0.000000> now;
+		turn Head to x-axis <-9.000000> now;
+		turn Head to y-axis <-11.000000> now;
+		turn ArmUL to x-axis <6.000000> now;
+		turn ArmUL to z-axis <0.000000> now;
+		turn ArmUR to x-axis <-10.197802> now;
+		turn ArmUR to y-axis <10.000000> now;
+		turn ArmLR to x-axis <-21.098901> now;
+		turn HandR to x-axis <22.505495> now;
+		turn ArmLL to x-axis <-102.021978> now;
+		turn HandL to x-axis <-3.142857> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <27.428571> now;
+		turn FootR to x-axis <4.923077> now;
+		turn LegLL to x-axis <34.461538> now;
+		turn FootL to x-axis <6.329670> now;
+		turn FootL to y-axis <5.000000> now;
+		sleep 117;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-4.000000> now;
+		turn Hip to z-axis <-2.000000> now;
+		turn LegUL to x-axis <-26.021978> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <6.857143> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn torso to x-axis <15.000000> now;
+		turn torso to y-axis <7.000000> now;
+		turn torso to z-axis <3.000000> now;
+		turn Head to x-axis <-15.000000> now;
+		turn Head to y-axis <-7.000000> now;
+		turn ArmUL to x-axis <9.000000> now;
+		turn ArmUL to z-axis <-1.000000> now;
+		turn ArmUR to x-axis <-8.087912> now;
+		turn ArmUR to y-axis <6.000000> now;
+		turn ArmLR to x-axis <-11.549451> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-104.021978> now;
+		turn HandL to x-axis <-9.472527> now;
+		turn HandL to y-axis <0.835165> now;
+		turn LegLR to x-axis <50.280220> now;
+		turn FootR to x-axis <26.021978> now;
+		turn LegLL to x-axis <23.208791> now;
+		turn FootL to x-axis <2.637363> now;
+		turn FootL to y-axis <2.000000> now;
+		sleep 117;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-2.000000> now;
+		turn Hip to z-axis <-4.000000> now;
+		turn LegUL to x-axis <-10.373626> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-7.824176> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn torso to x-axis <8.000000> now;
+		turn torso to y-axis <3.000000> now;
+		turn torso to z-axis <7.000000> now;
+		turn Head to x-axis <-8.000000> now;
+		turn Head to y-axis <-3.000000> now;
+		turn ArmUL to x-axis <6.000000> now;
+		turn ArmUL to z-axis <-3.000000> now;
+		turn ArmUR to x-axis <-7.032967> now;
+		turn ArmUR to y-axis <2.000000> now;
+		turn ArmLR to x-axis <-6.774725> now;
+		turn HandR to x-axis <15.472527> now;
+		turn ArmLL to x-axis <-102.021978> now;
+		turn HandL to x-axis <-1.736264> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <44.131868> now;
+		turn FootR to x-axis <5.626374> now;
+		turn LegLL to x-axis <7.736264> now;
+		turn FootL to x-axis <2.373626> now;
+		turn FootL to y-axis <0.000000> now;
+		sleep 128;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <0.000000> now;
+		turn Hip to z-axis <-7.000000> now;
+		turn LegUL to x-axis <-2.109890> now;
+		turn LegUL to z-axis <7.000000> now;
+		turn LegUR to x-axis <-18.637363> now;
+		turn LegUR to z-axis <7.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <0.000000> now;
+		turn torso to z-axis <11.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <0.000000> now;
+		turn ArmUL to x-axis <3.000000> now;
+		turn ArmUL to z-axis <-7.000000> now;
+		turn ArmUR to x-axis <-5.978022> now;
+		turn ArmUR to y-axis <0.000000> now;
+		turn ArmLR to x-axis <-2.000000> now;
+		turn HandR to x-axis <9.142857> now;
+		turn ArmLL to x-axis <-100.021978> now;
+		turn HandL to x-axis <4.587912> now;
+		turn HandL to y-axis <2.241758> now;
+		turn LegLR to x-axis <42.543956> now;
+		turn FootR to x-axis <-6.329670> now;
+		turn LegLL to x-axis <1.752747> now;
+		turn FootL to x-axis <0.000000> now;
+		sleep 117;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <2.000000> now;
+		turn Hip to z-axis <-4.000000> now;
+		turn LegUL to x-axis <8.087912> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-32.521978> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn torso to x-axis <0.000000> now;
+		turn torso to y-axis <-3.000000> now;
+		turn torso to z-axis <7.000000> now;
+		turn Head to x-axis <0.000000> now;
+		turn Head to y-axis <3.000000> now;
+		turn ArmUL to x-axis <0.000000> now;
+		turn ArmUL to z-axis <-3.000000> now;
+		turn ArmUR to x-axis <-0.483516> now;
+		turn ArmUR to y-axis <-2.000000> now;
+		turn ArmLR to x-axis <1.500000> now;
+		turn HandR to x-axis <20.373626> now;
+		turn ArmLL to x-axis <-97.021978> now;
+		turn HandL to x-axis <7.401099> now;
+		turn HandL to y-axis <-1.269231> now;
+		turn LegLR to x-axis <32.000000> now;
+		turn FootR to x-axis <-1.934066> now;
+		turn LegLL to x-axis <2.813187> now;
+		turn FootL to x-axis <-11.956044> now;
+		sleep 115;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <4.000000> now;
+		turn Hip to z-axis <-2.000000> now;
+		turn LegUL to x-axis <11.604396> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <-45.098901> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <-7.000000> now;
+		turn torso to z-axis <3.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <7.000000> now;
+		turn ArmUL to x-axis <-3.000000> now;
+		turn ArmUL to z-axis <-1.000000> now;
+		turn ArmUR to x-axis <2.252747> now;
+		turn ArmUR to y-axis <-5.000000> now;
+		turn ArmLR to x-axis <3.247253> now;
+		turn HandR to x-axis <28.450549> now;
+		turn ArmLL to x-axis <-95.021978> now;
+		turn HandL to x-axis <5.642857> now;
+		turn HandL to y-axis <-0.917582> now;
+		turn LegLR to x-axis <27.598901> now;
+		turn FootR to x-axis <-9.230769> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <19.692308> now;
+		turn FootL to x-axis <-5.093407> now;
+		sleep 129;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <7.000000> now;
+		turn Hip to z-axis <0.000000> now;
+		turn LegUL to x-axis <16.879121> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <-40.434066> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn torso to x-axis <9.000000> now;
+		turn torso to y-axis <-11.000000> now;
+		turn torso to z-axis <0.000000> now;
+		turn Head to x-axis <-9.000000> now;
+		turn Head to y-axis <11.000000> now;
+		turn ArmUL to x-axis <-9.000000> now;
+		turn ArmUL to z-axis <0.000000> now;
+		turn ArmUR to x-axis <5.000000> now;
+		turn ArmUR to y-axis <-7.000000> now;
+		turn ArmLR to x-axis <5.000000> now;
+		turn HandR to x-axis <29.494505> now;
+		turn ArmLL to x-axis <-90.021978> now;
+		turn HandL to x-axis <0.368132> now;
+		turn HandL to y-axis <0.131868> now;
+		turn LegLR to x-axis <34.461538> now;
+		turn FootR to x-axis <6.329670> now;
+		turn FootR to y-axis <-5.000000> now;
+		turn LegLL to x-axis <27.428571> now;
+		turn FootL to x-axis <4.923077> now;
+		sleep 116;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <4.000000> now;
+		turn Hip to z-axis <2.000000> now;
+		turn LegUL to x-axis <6.857143> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <-26.021978> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn torso to x-axis <15.000000> now;
+		turn torso to y-axis <-7.000000> now;
+		turn torso to z-axis <-3.000000> now;
+		turn Head to x-axis <-15.000000> now;
+		turn Head to y-axis <7.000000> now;
+		turn ArmUL to x-axis <-15.000000> now;
+		turn ArmUL to z-axis <1.000000> now;
+		turn ArmUR to x-axis <-0.483516> now;
+		turn ArmUR to y-axis <-5.000000> now;
+		turn ArmLR to x-axis <1.500000> now;
+		turn HandR to x-axis <47.802198> now;
+		turn ArmLL to x-axis <-85.016484> now;
+		turn HandL to x-axis <-4.197802> now;
+		turn HandL to y-axis <0.835165> now;
+		turn LegLR to x-axis <23.208791> now;
+		turn FootR to x-axis <2.637363> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <50.280220> now;
+		turn FootL to x-axis <26.021978> now;
+		sleep 117;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <2.000000> now;
+		turn Hip to z-axis <4.000000> now;
+		turn LegUL to x-axis <-8.170330> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <-10.373626> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn torso to x-axis <8.000000> now;
+		turn torso to y-axis <-3.000000> now;
+		turn torso to z-axis <-7.000000> now;
+		turn Head to x-axis <-8.000000> now;
+		turn Head to y-axis <3.000000> now;
+		turn ArmUL to x-axis <-8.000000> now;
+		turn ArmUL to z-axis <3.000000> now;
+		turn ArmUR to x-axis <-3.230769> now;
+		turn ArmUR to y-axis <-2.000000> now;
+		turn ArmLR to x-axis <-0.247253> now;
+		turn HandR to x-axis <49.219780> now;
+		turn ArmLL to x-axis <-90.021978> now;
+		turn HandL to x-axis <0.719780> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <7.736264> now;
+		turn FootR to x-axis <2.373626> now;
+		turn FootR to y-axis <0.000000> now;
+		turn LegLL to x-axis <48.170330> now;
+		turn FootL to x-axis <11.423077> now;
+		sleep 128;
+	}
+	return;
+}
+
+walk_road()
+{
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to z-axis <7.000000> now;
+		turn LegUL to x-axis <-18.637363> now;
+		turn LegUL to z-axis <-7.000000> now;
+		turn LegUR to x-axis <-2.109890> now;
+		turn LegUR to z-axis <-7.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to z-axis <-11.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn ArmUL to x-axis <-3.000000> now;
+		turn ArmUL to z-axis <7.000000> now;
+		turn ArmUR to x-axis <-5.978022> now;
+		turn ArmLR to x-axis <-2.000000> now;
+		turn ArmLR to y-axis <-5.000000> now;
+		turn HandR to x-axis <39.730769> now;
+		turn ArmLL to x-axis <-95.021978> now;
+		turn ArmLL to z-axis <-10.000000> now;
+		turn HandL to x-axis <5.994505> now;
+		turn HandL to y-axis <-4.082418> now;
+		turn LegLR to x-axis <1.752747> now;
+		turn LegLL to x-axis <42.543956> now;
+		turn FootL to x-axis <-8.791209> now;
+		sleep 90;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-2.000000> now;
+		turn Hip to z-axis <4.000000> now;
+		turn LegUL to x-axis <-32.521978> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <8.087912> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn torso to x-axis <0.000000> now;
+		turn torso to y-axis <3.000000> now;
+		turn torso to z-axis <-7.000000> now;
+		turn Head to x-axis <0.000000> now;
+		turn Head to y-axis <-3.000000> now;
+		turn ArmUL to x-axis <0.000000> now;
+		turn ArmUL to z-axis <3.000000> now;
+		turn ArmUR to x-axis <-8.087912> now;
+		turn ArmUR to y-axis <2.000000> now;
+		turn ArmLR to x-axis <-11.549451> now;
+		turn HandR to x-axis <29.186813> now;
+		turn ArmLL to x-axis <-97.021978> now;
+		turn HandL to x-axis <7.049451> now;
+		turn HandL to y-axis <-1.269231> now;
+		turn LegLR to x-axis <2.813187> now;
+		turn FootR to x-axis <-11.956044> now;
+		turn LegLL to x-axis <32.000000> now;
+		turn FootL to x-axis <-1.934066> now;
+		sleep 97;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-4.000000> now;
+		turn Hip to z-axis <2.000000> now;
+		turn LegUL to x-axis <-45.098901> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <11.604396> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <9.109890> now;
+		turn torso to z-axis <-3.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <-7.000000> now;
+		turn ArmUL to x-axis <3.000000> now;
+		turn ArmUL to z-axis <1.000000> now;
+		turn ArmUR to x-axis <-9.142857> now;
+		turn ArmUR to y-axis <6.000000> now;
+		turn ArmLR to x-axis <-16.324176> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-100.021978> now;
+		turn HandL to x-axis <3.532967> now;
+		turn HandL to y-axis <-0.917582> now;
+		turn LegLR to x-axis <19.692308> now;
+		turn FootR to x-axis <-5.093407> now;
+		turn LegLL to x-axis <27.598901> now;
+		turn FootL to x-axis <-9.230769> now;
+		turn FootL to y-axis <2.000000> now;
+		sleep 103;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-7.000000> now;
+		turn Hip to z-axis <0.000000> now;
+		turn LegUL to x-axis <-40.434066> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <16.879121> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn torso to x-axis <9.000000> now;
+		turn torso to y-axis <11.351648> now;
+		turn torso to z-axis <0.000000> now;
+		turn Head to x-axis <-9.000000> now;
+		turn Head to y-axis <-11.000000> now;
+		turn ArmUL to x-axis <6.000000> now;
+		turn ArmUL to z-axis <0.000000> now;
+		turn ArmUR to x-axis <-10.197802> now;
+		turn ArmUR to y-axis <10.000000> now;
+		turn ArmLR to x-axis <-21.098901> now;
+		turn HandR to x-axis <22.505495> now;
+		turn ArmLL to x-axis <-102.021978> now;
+		turn HandL to x-axis <-3.142857> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <27.428571> now;
+		turn FootR to x-axis <4.923077> now;
+		turn LegLL to x-axis <34.461538> now;
+		turn FootL to x-axis <6.329670> now;
+		turn FootL to y-axis <5.000000> now;
+		sleep 98;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-4.000000> now;
+		turn Hip to z-axis <-2.000000> now;
+		turn LegUL to x-axis <-26.021978> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <6.857143> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn torso to x-axis <15.000000> now;
+		turn torso to y-axis <7.000000> now;
+		turn torso to z-axis <3.000000> now;
+		turn Head to x-axis <-15.000000> now;
+		turn Head to y-axis <-7.000000> now;
+		turn ArmUL to x-axis <9.000000> now;
+		turn ArmUL to z-axis <-1.000000> now;
+		turn ArmUR to x-axis <-8.087912> now;
+		turn ArmUR to y-axis <6.000000> now;
+		turn ArmLR to x-axis <-11.549451> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-104.021978> now;
+		turn HandL to x-axis <-9.472527> now;
+		turn HandL to y-axis <0.835165> now;
+		turn LegLR to x-axis <50.280220> now;
+		turn FootR to x-axis <26.021978> now;
+		turn LegLL to x-axis <23.208791> now;
+		turn FootL to x-axis <2.637363> now;
+		turn FootL to y-axis <2.000000> now;
+		sleep 96;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-2.000000> now;
+		turn Hip to z-axis <-4.000000> now;
+		turn LegUL to x-axis <-10.373626> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-7.824176> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn torso to x-axis <8.000000> now;
+		turn torso to y-axis <3.000000> now;
+		turn torso to z-axis <7.000000> now;
+		turn Head to x-axis <-8.000000> now;
+		turn Head to y-axis <-3.000000> now;
+		turn ArmUL to x-axis <6.000000> now;
+		turn ArmUL to z-axis <-3.000000> now;
+		turn ArmUR to x-axis <-7.032967> now;
+		turn ArmUR to y-axis <2.000000> now;
+		turn ArmLR to x-axis <-6.774725> now;
+		turn HandR to x-axis <15.472527> now;
+		turn ArmLL to x-axis <-102.021978> now;
+		turn HandL to x-axis <-1.736264> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <44.131868> now;
+		turn FootR to x-axis <5.626374> now;
+		turn LegLL to x-axis <7.736264> now;
+		turn FootL to x-axis <2.373626> now;
+		turn FootL to y-axis <0.000000> now;
+		sleep 105;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <0.000000> now;
+		turn Hip to z-axis <-7.000000> now;
+		turn LegUL to x-axis <-2.109890> now;
+		turn LegUL to z-axis <7.000000> now;
+		turn LegUR to x-axis <-18.637363> now;
+		turn LegUR to z-axis <7.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <0.000000> now;
+		turn torso to z-axis <11.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <0.000000> now;
+		turn ArmUL to x-axis <3.000000> now;
+		turn ArmUL to z-axis <-7.000000> now;
+		turn ArmUR to x-axis <-5.978022> now;
+		turn ArmUR to y-axis <0.000000> now;
+		turn ArmLR to x-axis <-2.000000> now;
+		turn HandR to x-axis <9.142857> now;
+		turn ArmLL to x-axis <-100.021978> now;
+		turn HandL to x-axis <4.587912> now;
+		turn HandL to y-axis <2.241758> now;
+		turn LegLR to x-axis <42.543956> now;
+		turn FootR to x-axis <-6.329670> now;
+		turn LegLL to x-axis <1.752747> now;
+		turn FootL to x-axis <0.000000> now;
+		sleep 98;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <2.000000> now;
+		turn Hip to z-axis <-4.000000> now;
+		turn LegUL to x-axis <8.087912> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-32.521978> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn torso to x-axis <0.000000> now;
+		turn torso to y-axis <-3.000000> now;
+		turn torso to z-axis <7.000000> now;
+		turn Head to x-axis <0.000000> now;
+		turn Head to y-axis <3.000000> now;
+		turn ArmUL to x-axis <0.000000> now;
+		turn ArmUL to z-axis <-3.000000> now;
+		turn ArmUR to x-axis <-0.483516> now;
+		turn ArmUR to y-axis <-2.000000> now;
+		turn ArmLR to x-axis <1.500000> now;
+		turn HandR to x-axis <20.373626> now;
+		turn ArmLL to x-axis <-97.021978> now;
+		turn HandL to x-axis <7.401099> now;
+		turn HandL to y-axis <-1.269231> now;
+		turn LegLR to x-axis <32.000000> now;
+		turn FootR to x-axis <-1.934066> now;
+		turn LegLL to x-axis <2.813187> now;
+		turn FootL to x-axis <-11.956044> now;
+		sleep 94;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <4.000000> now;
+		turn Hip to z-axis <-2.000000> now;
+		turn LegUL to x-axis <11.604396> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <-45.098901> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <-7.000000> now;
+		turn torso to z-axis <3.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <7.000000> now;
+		turn ArmUL to x-axis <-3.000000> now;
+		turn ArmUL to z-axis <-1.000000> now;
+		turn ArmUR to x-axis <2.252747> now;
+		turn ArmUR to y-axis <-5.000000> now;
+		turn ArmLR to x-axis <3.247253> now;
+		turn HandR to x-axis <28.450549> now;
+		turn ArmLL to x-axis <-95.021978> now;
+		turn HandL to x-axis <5.642857> now;
+		turn HandL to y-axis <-0.917582> now;
+		turn LegLR to x-axis <27.598901> now;
+		turn FootR to x-axis <-9.230769> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <19.692308> now;
+		turn FootL to x-axis <-5.093407> now;
+		sleep 108;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <7.000000> now;
+		turn Hip to z-axis <0.000000> now;
+		turn LegUL to x-axis <16.879121> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <-40.434066> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn torso to x-axis <9.000000> now;
+		turn torso to y-axis <-11.000000> now;
+		turn torso to z-axis <0.000000> now;
+		turn Head to x-axis <-9.000000> now;
+		turn Head to y-axis <11.000000> now;
+		turn ArmUL to x-axis <-9.000000> now;
+		turn ArmUL to z-axis <0.000000> now;
+		turn ArmUR to x-axis <5.000000> now;
+		turn ArmUR to y-axis <-7.000000> now;
+		turn ArmLR to x-axis <5.000000> now;
+		turn HandR to x-axis <29.494505> now;
+		turn ArmLL to x-axis <-90.021978> now;
+		turn HandL to x-axis <0.368132> now;
+		turn HandL to y-axis <0.131868> now;
+		turn LegLR to x-axis <34.461538> now;
+		turn FootR to x-axis <6.329670> now;
+		turn FootR to y-axis <-5.000000> now;
+		turn LegLL to x-axis <27.428571> now;
+		turn FootL to x-axis <4.923077> now;
+		sleep 95;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <4.000000> now;
+		turn Hip to z-axis <2.000000> now;
+		turn LegUL to x-axis <6.857143> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <-26.021978> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn torso to x-axis <15.000000> now;
+		turn torso to y-axis <-7.000000> now;
+		turn torso to z-axis <-3.000000> now;
+		turn Head to x-axis <-15.000000> now;
+		turn Head to y-axis <7.000000> now;
+		turn ArmUL to x-axis <-15.000000> now;
+		turn ArmUL to z-axis <1.000000> now;
+		turn ArmUR to x-axis <-0.483516> now;
+		turn ArmUR to y-axis <-5.000000> now;
+		turn ArmLR to x-axis <1.500000> now;
+		turn HandR to x-axis <47.802198> now;
+		turn ArmLL to x-axis <-85.016484> now;
+		turn HandL to x-axis <-4.197802> now;
+		turn HandL to y-axis <0.835165> now;
+		turn LegLR to x-axis <23.208791> now;
+		turn FootR to x-axis <2.637363> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <50.280220> now;
+		turn FootL to x-axis <26.021978> now;
+		sleep 96;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <2.000000> now;
+		turn Hip to z-axis <4.000000> now;
+		turn LegUL to x-axis <-8.170330> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <-10.373626> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn torso to x-axis <8.000000> now;
+		turn torso to y-axis <-3.000000> now;
+		turn torso to z-axis <-7.000000> now;
+		turn Head to x-axis <-8.000000> now;
+		turn Head to y-axis <3.000000> now;
+		turn ArmUL to x-axis <-8.000000> now;
+		turn ArmUL to z-axis <3.000000> now;
+		turn ArmUR to x-axis <-3.230769> now;
+		turn ArmUR to y-axis <-2.000000> now;
+		turn ArmLR to x-axis <-0.247253> now;
+		turn HandR to x-axis <49.219780> now;
+		turn ArmLL to x-axis <-90.021978> now;
+		turn HandL to x-axis <0.719780> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <7.736264> now;
+		turn FootR to x-axis <2.373626> now;
+		turn FootR to y-axis <0.000000> now;
+		turn LegLL to x-axis <48.170330> now;
+		turn FootL to x-axis <11.423077> now;
+		sleep 107;
+	}
+	return;
+}
+
+walk_water()
+{
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to z-axis <7.000000> now;
+		turn LegUL to x-axis <-18.637363> now;
+		turn LegUL to z-axis <-7.000000> now;
+		turn LegUR to x-axis <-2.109890> now;
+		turn LegUR to z-axis <-7.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to z-axis <-11.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn ArmUL to x-axis <-3.000000> now;
+		turn ArmUL to z-axis <7.000000> now;
+		turn ArmUR to x-axis <-5.978022> now;
+		turn ArmLR to x-axis <-2.000000> now;
+		turn ArmLR to y-axis <-5.000000> now;
+		turn HandR to x-axis <39.730769> now;
+		turn ArmLL to x-axis <-95.021978> now;
+		turn ArmLL to z-axis <-10.000000> now;
+		turn HandL to x-axis <5.994505> now;
+		turn HandL to y-axis <-4.082418> now;
+		turn LegLR to x-axis <1.752747> now;
+		turn LegLL to x-axis <42.543956> now;
+		turn FootL to x-axis <-8.791209> now;
+		sleep 134;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-2.000000> now;
+		turn Hip to z-axis <4.000000> now;
+		turn LegUL to x-axis <-32.521978> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <8.087912> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn torso to x-axis <0.000000> now;
+		turn torso to y-axis <3.000000> now;
+		turn torso to z-axis <-7.000000> now;
+		turn Head to x-axis <0.000000> now;
+		turn Head to y-axis <-3.000000> now;
+		turn ArmUL to x-axis <0.000000> now;
+		turn ArmUL to z-axis <3.000000> now;
+		turn ArmUR to x-axis <-8.087912> now;
+		turn ArmUR to y-axis <2.000000> now;
+		turn ArmLR to x-axis <-11.549451> now;
+		turn HandR to x-axis <29.186813> now;
+		turn ArmLL to x-axis <-97.021978> now;
+		turn HandL to x-axis <7.049451> now;
+		turn HandL to y-axis <-1.269231> now;
+		turn LegLR to x-axis <2.813187> now;
+		turn FootR to x-axis <-11.956044> now;
+		turn LegLL to x-axis <32.000000> now;
+		turn FootL to x-axis <-1.934066> now;
+		sleep 139;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-4.000000> now;
+		turn Hip to z-axis <2.000000> now;
+		turn LegUL to x-axis <-45.098901> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <11.604396> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <9.109890> now;
+		turn torso to z-axis <-3.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <-7.000000> now;
+		turn ArmUL to x-axis <3.000000> now;
+		turn ArmUL to z-axis <1.000000> now;
+		turn ArmUR to x-axis <-9.142857> now;
+		turn ArmUR to y-axis <6.000000> now;
+		turn ArmLR to x-axis <-16.324176> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-100.021978> now;
+		turn HandL to x-axis <3.532967> now;
+		turn HandL to y-axis <-0.917582> now;
+		turn LegLR to x-axis <19.692308> now;
+		turn FootR to x-axis <-5.093407> now;
+		turn LegLL to x-axis <27.598901> now;
+		turn FootL to x-axis <-9.230769> now;
+		turn FootL to y-axis <2.000000> now;
+		sleep 153;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-7.000000> now;
+		turn Hip to z-axis <0.000000> now;
+		turn LegUL to x-axis <-40.434066> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <16.879121> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn torso to x-axis <9.000000> now;
+		turn torso to y-axis <11.351648> now;
+		turn torso to z-axis <0.000000> now;
+		turn Head to x-axis <-9.000000> now;
+		turn Head to y-axis <-11.000000> now;
+		turn ArmUL to x-axis <6.000000> now;
+		turn ArmUL to z-axis <0.000000> now;
+		turn ArmUR to x-axis <-10.197802> now;
+		turn ArmUR to y-axis <10.000000> now;
+		turn ArmLR to x-axis <-21.098901> now;
+		turn HandR to x-axis <22.505495> now;
+		turn ArmLL to x-axis <-102.021978> now;
+		turn HandL to x-axis <-3.142857> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <27.428571> now;
+		turn FootR to x-axis <4.923077> now;
+		turn LegLL to x-axis <34.461538> now;
+		turn FootL to x-axis <6.329670> now;
+		turn FootL to y-axis <5.000000> now;
+		emit-sfx 2 from wakel;
+		sleep 142;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-4.000000> now;
+		turn Hip to z-axis <-2.000000> now;
+		turn LegUL to x-axis <-26.021978> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <6.857143> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn torso to x-axis <15.000000> now;
+		turn torso to y-axis <7.000000> now;
+		turn torso to z-axis <3.000000> now;
+		turn Head to x-axis <-15.000000> now;
+		turn Head to y-axis <-7.000000> now;
+		turn ArmUL to x-axis <9.000000> now;
+		turn ArmUL to z-axis <-1.000000> now;
+		turn ArmUR to x-axis <-8.087912> now;
+		turn ArmUR to y-axis <6.000000> now;
+		turn ArmLR to x-axis <-11.549451> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-104.021978> now;
+		turn HandL to x-axis <-9.472527> now;
+		turn HandL to y-axis <0.835165> now;
+		turn LegLR to x-axis <50.280220> now;
+		turn FootR to x-axis <26.021978> now;
+		turn LegLL to x-axis <23.208791> now;
+		turn FootL to x-axis <2.637363> now;
+		turn FootL to y-axis <2.000000> now;
+		emit-sfx 2 from wakel;
+		sleep 141;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <-2.000000> now;
+		turn Hip to z-axis <-4.000000> now;
+		turn LegUL to x-axis <-10.373626> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-7.824176> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn torso to x-axis <8.000000> now;
+		turn torso to y-axis <3.000000> now;
+		turn torso to z-axis <7.000000> now;
+		turn Head to x-axis <-8.000000> now;
+		turn Head to y-axis <-3.000000> now;
+		turn ArmUL to x-axis <6.000000> now;
+		turn ArmUL to z-axis <-3.000000> now;
+		turn ArmUR to x-axis <-7.032967> now;
+		turn ArmUR to y-axis <2.000000> now;
+		turn ArmLR to x-axis <-6.774725> now;
+		turn HandR to x-axis <15.472527> now;
+		turn ArmLL to x-axis <-102.021978> now;
+		turn HandL to x-axis <-1.736264> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <44.131868> now;
+		turn FootR to x-axis <5.626374> now;
+		turn LegLL to x-axis <7.736264> now;
+		turn FootL to x-axis <2.373626> now;
+		turn FootL to y-axis <0.000000> now;
+		emit-sfx 2 from wakel;
+		sleep 155;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <0.000000> now;
+		turn Hip to z-axis <-7.000000> now;
+		turn LegUL to x-axis <-2.109890> now;
+		turn LegUL to z-axis <7.000000> now;
+		turn LegUR to x-axis <-18.637363> now;
+		turn LegUR to z-axis <7.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <0.000000> now;
+		turn torso to z-axis <11.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <0.000000> now;
+		turn ArmUL to x-axis <3.000000> now;
+		turn ArmUL to z-axis <-7.000000> now;
+		turn ArmUR to x-axis <-5.978022> now;
+		turn ArmUR to y-axis <0.000000> now;
+		turn ArmLR to x-axis <-2.000000> now;
+		turn HandR to x-axis <9.142857> now;
+		turn ArmLL to x-axis <-100.021978> now;
+		turn HandL to x-axis <4.587912> now;
+		turn HandL to y-axis <2.241758> now;
+		turn LegLR to x-axis <42.543956> now;
+		turn FootR to x-axis <-6.329670> now;
+		turn LegLL to x-axis <1.752747> now;
+		turn FootL to x-axis <0.000000> now;
+		sleep 142;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <2.000000> now;
+		turn Hip to z-axis <-4.000000> now;
+		turn LegUL to x-axis <8.087912> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-32.521978> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn torso to x-axis <0.000000> now;
+		turn torso to y-axis <-3.000000> now;
+		turn torso to z-axis <7.000000> now;
+		turn Head to x-axis <0.000000> now;
+		turn Head to y-axis <3.000000> now;
+		turn ArmUL to x-axis <0.000000> now;
+		turn ArmUL to z-axis <-3.000000> now;
+		turn ArmUR to x-axis <-0.483516> now;
+		turn ArmUR to y-axis <-2.000000> now;
+		turn ArmLR to x-axis <1.500000> now;
+		turn HandR to x-axis <20.373626> now;
+		turn ArmLL to x-axis <-97.021978> now;
+		turn HandL to x-axis <7.401099> now;
+		turn HandL to y-axis <-1.269231> now;
+		turn LegLR to x-axis <32.000000> now;
+		turn FootR to x-axis <-1.934066> now;
+		turn LegLL to x-axis <2.813187> now;
+		turn FootL to x-axis <-11.956044> now;
+		sleep 139;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <4.000000> now;
+		turn Hip to z-axis <-2.000000> now;
+		turn LegUL to x-axis <11.604396> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <-45.098901> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn torso to x-axis <3.000000> now;
+		turn torso to y-axis <-7.000000> now;
+		turn torso to z-axis <3.000000> now;
+		turn Head to x-axis <-3.000000> now;
+		turn Head to y-axis <7.000000> now;
+		turn ArmUL to x-axis <-3.000000> now;
+		turn ArmUL to z-axis <-1.000000> now;
+		turn ArmUR to x-axis <2.252747> now;
+		turn ArmUR to y-axis <-5.000000> now;
+		turn ArmLR to x-axis <3.247253> now;
+		turn HandR to x-axis <28.450549> now;
+		turn ArmLL to x-axis <-95.021978> now;
+		turn HandL to x-axis <5.642857> now;
+		turn HandL to y-axis <-0.917582> now;
+		turn LegLR to x-axis <27.598901> now;
+		turn FootR to x-axis <-9.230769> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <19.692308> now;
+		turn FootL to x-axis <-5.093407> now;
+		sleep 156;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <7.000000> now;
+		turn Hip to z-axis <0.000000> now;
+		turn LegUL to x-axis <16.879121> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <-40.434066> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn torso to x-axis <9.000000> now;
+		turn torso to y-axis <-11.000000> now;
+		turn torso to z-axis <0.000000> now;
+		turn Head to x-axis <-9.000000> now;
+		turn Head to y-axis <11.000000> now;
+		turn ArmUL to x-axis <-9.000000> now;
+		turn ArmUL to z-axis <0.000000> now;
+		turn ArmUR to x-axis <5.000000> now;
+		turn ArmUR to y-axis <-7.000000> now;
+		turn ArmLR to x-axis <5.000000> now;
+		turn HandR to x-axis <29.494505> now;
+		turn ArmLL to x-axis <-90.021978> now;
+		turn HandL to x-axis <0.368132> now;
+		turn HandL to y-axis <0.131868> now;
+		turn LegLR to x-axis <34.461538> now;
+		turn FootR to x-axis <6.329670> now;
+		turn FootR to y-axis <-5.000000> now;
+		turn LegLL to x-axis <27.428571> now;
+		turn FootL to x-axis <4.923077> now;
+		emit-sfx 2 from waker;
+		sleep 141;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <4.000000> now;
+		turn Hip to z-axis <2.000000> now;
+		turn LegUL to x-axis <6.857143> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <-26.021978> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn torso to x-axis <15.000000> now;
+		turn torso to y-axis <-7.000000> now;
+		turn torso to z-axis <-3.000000> now;
+		turn Head to x-axis <-15.000000> now;
+		turn Head to y-axis <7.000000> now;
+		turn ArmUL to x-axis <-15.000000> now;
+		turn ArmUL to z-axis <1.000000> now;
+		turn ArmUR to x-axis <-0.483516> now;
+		turn ArmUR to y-axis <-5.000000> now;
+		turn ArmLR to x-axis <1.500000> now;
+		turn HandR to x-axis <47.802198> now;
+		turn ArmLL to x-axis <-85.016484> now;
+		turn HandL to x-axis <-4.197802> now;
+		turn HandL to y-axis <0.835165> now;
+		turn LegLR to x-axis <23.208791> now;
+		turn FootR to x-axis <2.637363> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <50.280220> now;
+		turn FootL to x-axis <26.021978> now;
+		emit-sfx 2 from waker;
+		sleep 140;
+	}
+	if( moving AND ( !firing ) )
+	{
+		turn Hip to y-axis <2.000000> now;
+		turn Hip to z-axis <4.000000> now;
+		turn LegUL to x-axis <-8.170330> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <-10.373626> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn torso to x-axis <8.000000> now;
+		turn torso to y-axis <-3.000000> now;
+		turn torso to z-axis <-7.000000> now;
+		turn Head to x-axis <-8.000000> now;
+		turn Head to y-axis <3.000000> now;
+		turn ArmUL to x-axis <-8.000000> now;
+		turn ArmUL to z-axis <3.000000> now;
+		turn ArmUR to x-axis <-3.230769> now;
+		turn ArmUR to y-axis <-2.000000> now;
+		turn ArmLR to x-axis <-0.247253> now;
+		turn HandR to x-axis <49.219780> now;
+		turn ArmLL to x-axis <-90.021978> now;
+		turn HandL to x-axis <0.719780> now;
+		turn HandL to y-axis <-0.214286> now;
+		turn LegLR to x-axis <7.736264> now;
+		turn FootR to x-axis <2.373626> now;
+		turn FootR to y-axis <0.000000> now;
+		turn LegLL to x-axis <48.170330> now;
+		turn FootL to x-axis <11.423077> now;
+		emit-sfx 2 from waker;
+		sleep 156;
+	}
+	return;
+}
+
+walk_legs()
+{
+	if( moving )
+	{
+		turn LegUL to x-axis <-18.637363> now;
+		turn LegUL to z-axis <-7.000000> now;
+		turn LegUR to x-axis <-2.109890> now;
+		turn LegUR to z-axis <-7.000000> now;
+		turn LegLR to x-axis <1.752747> now;
+		turn LegLL to x-axis <42.543956> now;
+		turn FootL to x-axis <-8.791209> now;
+		sleep 111;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <-32.521978> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <8.087912> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn LegLR to x-axis <2.813187> now;
+		turn FootR to x-axis <-11.956044> now;
+		turn LegLL to x-axis <32.000000> now;
+		turn FootL to x-axis <-1.934066> now;
+		sleep 116;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <-45.098901> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <11.604396> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn LegLR to x-axis <19.692308> now;
+		turn FootR to x-axis <-5.093407> now;
+		turn LegLL to x-axis <27.598901> now;
+		turn FootL to x-axis <-9.230769> now;
+		turn FootL to y-axis <2.000000> now;
+		sleep 126;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <-40.434066> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <16.879121> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn LegLR to x-axis <27.428571> now;
+		turn FootR to x-axis <4.923077> now;
+		turn LegLL to x-axis <34.461538> now;
+		turn FootL to x-axis <6.329670> now;
+		turn FootL to y-axis <5.000000> now;
+		sleep 117;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <-26.021978> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <6.857143> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn LegLR to x-axis <50.280220> now;
+		turn FootR to x-axis <26.021978> now;
+		turn LegLL to x-axis <23.208791> now;
+		turn FootL to x-axis <2.637363> now;
+		turn FootL to y-axis <2.000000> now;
+		sleep 117;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <-10.373626> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-7.824176> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn LegLR to x-axis <44.131868> now;
+		turn FootR to x-axis <5.626374> now;
+		turn LegLL to x-axis <7.736264> now;
+		turn FootL to x-axis <2.373626> now;
+		turn FootL to y-axis <0.000000> now;
+		sleep 128;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <-2.109890> now;
+		turn LegUL to z-axis <7.000000> now;
+		turn LegUR to x-axis <-18.637363> now;
+		turn LegUR to z-axis <7.000000> now;
+		turn LegLR to x-axis <42.543956> now;
+		turn FootR to x-axis <-6.329670> now;
+		turn LegLL to x-axis <1.752747> now;
+		turn FootL to x-axis <0.000000> now;
+		sleep 117;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <8.087912> now;
+		turn LegUL to z-axis <4.000000> now;
+		turn LegUR to x-axis <-32.521978> now;
+		turn LegUR to z-axis <4.000000> now;
+		turn LegLR to x-axis <32.000000> now;
+		turn FootR to x-axis <-1.934066> now;
+		turn LegLL to x-axis <2.813187> now;
+		turn FootL to x-axis <-11.956044> now;
+		sleep 115;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <11.604396> now;
+		turn LegUL to z-axis <2.000000> now;
+		turn LegUR to x-axis <-45.098901> now;
+		turn LegUR to z-axis <2.000000> now;
+		turn LegLR to x-axis <27.598901> now;
+		turn FootR to x-axis <-9.230769> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <19.692308> now;
+		turn FootL to x-axis <-5.093407> now;
+		sleep 129;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <16.879121> now;
+		turn LegUL to z-axis <0.000000> now;
+		turn LegUR to x-axis <-40.434066> now;
+		turn LegUR to z-axis <0.000000> now;
+		turn LegLR to x-axis <34.461538> now;
+		turn FootR to x-axis <6.329670> now;
+		turn FootR to y-axis <-5.000000> now;
+		turn LegLL to x-axis <27.428571> now;
+		turn FootL to x-axis <4.923077> now;
+		sleep 116;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <6.857143> now;
+		turn LegUL to z-axis <-2.000000> now;
+		turn LegUR to x-axis <-26.021978> now;
+		turn LegUR to z-axis <-2.000000> now;
+		turn LegLR to x-axis <23.208791> now;
+		turn FootR to x-axis <2.637363> now;
+		turn FootR to y-axis <-2.000000> now;
+		turn LegLL to x-axis <50.280220> now;
+		turn FootL to x-axis <26.021978> now;
+		sleep 117;
+	}
+	if( moving )
+	{
+		turn LegUL to x-axis <-8.170330> now;
+		turn LegUL to z-axis <-4.000000> now;
+		turn LegUR to x-axis <-10.373626> now;
+		turn LegUR to z-axis <-4.000000> now;
+		turn LegLR to x-axis <7.736264> now;
+		turn FootR to x-axis <2.373626> now;
+		turn FootR to y-axis <0.000000> now;
+		turn LegLL to x-axis <48.170330> now;
+		turn FootL to x-axis <11.423077> now;
+		sleep 128;
+	}
+	return;
+}
+
+build()
+{
+	if( vetlevel > 9 )
+	{
+		show hammer10;
+	}
+	else
+	{
+		show hammer;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <25.005495> now;
+		turn Head to x-axis <-16.527473> now;
+		turn Head to y-axis <-28.879121> now;
+		turn ArmUL to x-axis <-2.000000> now;
+		turn ArmUL to y-axis <1.752747> now;
+		turn ArmUR to x-axis <-106.901099> now;
+		turn ArmUR to y-axis <-24.967033> now;
+		turn ArmLR to x-axis <-26.725275> now;
+		turn ArmLR to y-axis <9.763736> now;
+		turn ArmLR to z-axis <4.219780> now;
+		turn HandR to x-axis <56.967033> now;
+		turn HandR to y-axis <14.065934> now;
+		turn hammer to x-axis <16.527473> now;
+		turn hammer to z-axis <-24.615385> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to y-axis <18.285714> now;
+		turn ArmLL to z-axis <-3.670330> now;
+		turn HandL to x-axis <-1.736264> now;
+		turn HandL to y-axis <0.131868> now;
+		turn HandL to z-axis <28.478022> now;
+		sleep 110;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <37.840659> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUL to y-axis <-9.494505> now;
+		turn ArmUR to y-axis <-21.802198> now;
+		turn HandR to x-axis <53.274725> now;
+		turn hammer to z-axis <-8.263736> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.483516> now;
+		sleep 110;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <50.675824> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUL to y-axis <-20.747253> now;
+		turn ArmUR to y-axis <-18.637363> now;
+		turn HandR to x-axis <49.582418> now;
+		turn hammer to z-axis <8.087912> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.478022> now;
+		sleep 114;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <45.401099> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUR to y-axis <-16.175824> now;
+		turn ArmLR to y-axis <20.664835> now;
+		turn HandR to x-axis <44.835165> now;
+		turn hammer to z-axis <4.043956> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.483516> now;
+		sleep 115;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <40.126374> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUR to y-axis <-13.708791> now;
+		turn ArmLR to y-axis <31.565934> now;
+		turn HandR to x-axis <40.087912> now;
+		turn hammer to z-axis <0.000000> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.478022> now;
+		sleep 115;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <28.170330> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUL to y-axis <-6.500000> now;
+		turn ArmUR to y-axis <-11.252747> now;
+		turn HandR to x-axis <26.895604> now;
+		turn hammer to z-axis <-6.153846> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.483516> now;
+		sleep 115;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <16.214286> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUL to y-axis <7.736264> now;
+		turn ArmUR to y-axis <-8.785714> now;
+		turn HandR to x-axis <13.708791> now;
+		turn hammer to z-axis <-12.307692> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.478022> now;
+		sleep 114;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <13.752747> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUR to y-axis <-15.472527> now;
+		turn ArmLR to y-axis <14.510989> now;
+		turn HandR to x-axis <11.780220> now;
+		turn hammer to z-axis <-15.642857> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.483516> now;
+		sleep 115;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <11.291209> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUR to y-axis <-22.148352> now;
+		turn ArmLR to y-axis <-2.538462> now;
+		turn HandR to x-axis <9.846154> now;
+		turn hammer to z-axis <-18.989011> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.478022> now;
+		sleep 114;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <13.401099> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUR to y-axis <-18.989011> now;
+		turn ArmLR to y-axis <-9.571429> now;
+		turn HandR to x-axis <24.967033> now;
+		turn hammer to z-axis <-14.593407> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.483516> now;
+		sleep 115;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <15.510989> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUR to y-axis <-15.818681> now;
+		turn ArmLR to y-axis <-16.604396> now;
+		turn HandR to x-axis <40.087912> now;
+		turn hammer to z-axis <-10.197802> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.478022> now;
+		sleep 114;
+	}
+	if( building AND ( !aiming ) )
+	{
+		turn torso to y-axis <20.258242> now;
+		turn Head to x-axis <-16.527473> now;
+		turn ArmUL to y-axis <4.747253> now;
+		turn ArmUR to y-axis <-20.395604> now;
+		turn ArmLR to y-axis <-3.417582> now;
+		turn HandR to x-axis <48.527473> now;
+		turn hammer to z-axis <-17.406593> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn HandL to z-axis <28.483516> now;
+		sleep 115;
+	}
+	return;
+}
+
+startbuild()
+{
+	if( vetlevel > 9 )
+	{
+		show hammer10;
+	}
+	else
+	{
+		show hammer;
+	}
+	if( !aiming )
+	{
+		turn ArmUL to x-axis <-2.000000> now;
+		turn ArmLR to y-axis <-5.000000> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to z-axis <-10.000000> now;
+		turn HandL to x-axis <-1.736264> now;
+		turn HandL to y-axis <0.131868> now;
+		sleep 117;
+	}
+	if( !aiming )
+	{
+		turn torso to y-axis <6.247253> now;
+		turn Head to x-axis <-4.126374> now;
+		turn Head to y-axis <-7.219780> now;
+		turn ArmUL to y-axis <0.434066> now;
+		turn ArmUR to x-axis <-26.725275> now;
+		turn ArmUR to y-axis <-6.236264> now;
+		turn ArmLR to x-axis <-6.675824> now;
+		turn ArmLR to y-axis <-1.307692> now;
+		turn ArmLR to z-axis <1.049451> now;
+		turn HandR to x-axis <22.939560> now;
+		turn HandR to y-axis <3.516484> now;
+		turn hammer to x-axis <4.126374> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to y-axis <4.565934> now;
+		turn ArmLL to z-axis <-8.417582> now;
+		turn HandL to z-axis <7.120879> now;
+		sleep 117;
+	}
+	if( !aiming )
+	{
+		turn torso to y-axis <12.500000> now;
+		turn Head to x-axis <-8.263736> now;
+		turn Head to y-axis <-14.439560> now;
+		turn ArmUL to y-axis <0.873626> now;
+		turn ArmUR to x-axis <-53.450549> now;
+		turn ArmUR to y-axis <-12.483516> now;
+		turn ArmLR to x-axis <-13.362637> now;
+		turn ArmLR to y-axis <2.379121> now;
+		turn ArmLR to z-axis <2.109890> now;
+		turn HandR to x-axis <28.659341> now;
+		turn HandR to y-axis <7.032967> now;
+		turn hammer to x-axis <8.263736> now;
+		turn ArmLL to y-axis <9.142857> now;
+		turn ArmLL to z-axis <-6.835165> now;
+		turn HandL to z-axis <14.236264> now;
+		sleep 117;
+	}
+	if( !aiming )
+	{
+		turn torso to y-axis <18.752747> now;
+		turn Head to x-axis <-12.390110> now;
+		turn Head to y-axis <-21.659341> now;
+		turn ArmUL to y-axis <1.313187> now;
+		turn ArmUR to x-axis <-80.175824> now;
+		turn ArmUR to y-axis <-18.719780> now;
+		turn ArmLR to x-axis <-20.038462> now;
+		turn ArmLR to y-axis <6.071429> now;
+		turn ArmLR to z-axis <3.159341> now;
+		turn HandR to x-axis <34.368132> now;
+		turn HandR to y-axis <10.549451> now;
+		turn hammer to x-axis <12.390110> now;
+		turn ArmLL to y-axis <13.708791> now;
+		turn ArmLL to z-axis <-5.252747> now;
+		turn HandL to z-axis <21.362637> now;
+		sleep 118;
+	}
+	if( !aiming )
+	{
+		turn torso to y-axis <25.005495> now;
+		turn Head to x-axis <-16.527473> now;
+		turn Head to y-axis <-28.879121> now;
+		turn ArmUL to y-axis <1.752747> now;
+		turn ArmUR to x-axis <-106.901099> now;
+		turn ArmUR to y-axis <-24.967033> now;
+		turn ArmLR to x-axis <-26.725275> now;
+		turn ArmLR to y-axis <9.763736> now;
+		turn ArmLR to z-axis <4.219780> now;
+		turn HandR to x-axis <40.087912> now;
+		turn HandR to y-axis <14.065934> now;
+		turn hammer to x-axis <16.527473> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to y-axis <18.285714> now;
+		turn ArmLL to z-axis <-3.670330> now;
+		turn HandL to z-axis <28.478022> now;
+		sleep 73;
+	}
+	return;
+}
+
+attack1(weapon)
+{
+	if( vetlevel > 9 )
+	{
+		show hammer10;
+	}
+	else
+	{
+		show hammer;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <-1.247253> now;
+		turn torso to y-axis <-5.000000> now;
+		turn Head to y-axis <5.000000> now;
+		turn Head to z-axis <-1.873626> now;
+		turn ArmUL to x-axis <-2.000000> now;
+		turn ArmUL to y-axis <5.796703> now;
+		turn ArmUR to x-axis <-6.000000> now;
+		turn ArmUR to y-axis <-10.450549> now;
+		turn ArmLR to x-axis <-8.071429> now;
+		turn ArmLR to y-axis <-5.000000> now;
+		turn ArmLR to z-axis <2.626374> now;
+		turn HandR to x-axis <17.230769> now;
+		turn HandR to y-axis <-19.554945> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to y-axis <-0.609890> now;
+		turn ArmLL to z-axis <-11.274725> now;
+		turn HandL to x-axis <-0.373626> now;
+		turn HandL to y-axis <-0.170330> now;
+		sleep 95;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <-3.747253> now;
+		turn torso to y-axis <-15.000000> now;
+		turn Head to y-axis <15.000000> now;
+		turn Head to z-axis <-5.626374> now;
+		turn ArmUL to y-axis <17.406593> now;
+		turn ArmUR to x-axis <-18.005495> now;
+		turn ArmUR to y-axis <-31.351648> now;
+		turn ArmLR to x-axis <-24.214286> now;
+		turn ArmLR to z-axis <7.879121> now;
+		turn HandR to y-axis <-58.675824> now;
+		turn ArmLL to y-axis <-1.840659> now;
+		turn ArmLL to z-axis <-13.824176> now;
+		turn HandL to x-axis <1.818681> now;
+		turn HandL to y-axis <-1.489011> now;
+		sleep 97;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <-6.247253> now;
+		turn torso to y-axis <-25.005495> now;
+		turn Head to y-axis <25.005495> now;
+		turn Head to z-axis <-9.373626> now;
+		turn ArmUL to y-axis <29.005495> now;
+		turn ArmUR to x-axis <-37.049451> now;
+		turn ArmUR to y-axis <-43.406593> now;
+		turn ArmLR to x-axis <-49.500000> now;
+		turn ArmLR to z-axis <18.763736> now;
+		turn HandR to y-axis <-74.945055> now;
+		turn ArmLL to y-axis <-3.076923> now;
+		turn ArmLL to z-axis <-16.373626> now;
+		turn HandL to x-axis <2.961538> now;
+		turn HandL to y-axis <-3.862637> now;
+		sleep 105;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <-8.747253> now;
+		turn torso to y-axis <-35.005495> now;
+		turn Head to y-axis <35.005495> now;
+		turn Head to z-axis <-13.126374> now;
+		turn ArmUL to y-axis <40.615385> now;
+		turn ArmUR to x-axis <-81.054945> now;
+		turn ArmUR to y-axis <-42.505495> now;
+		turn ArmLR to x-axis <-106.791209> now;
+		turn ArmLR to z-axis <11.005495> now;
+		turn HandR to x-axis <2.109890> now;
+		turn HandR to y-axis <-51.472527> now;
+		turn ArmLL to y-axis <-4.307692> now;
+		turn ArmLL to z-axis <-18.923077> now;
+		turn HandL to x-axis <3.401099> now;
+		turn HandL to y-axis <-6.587912> now;
+		sleep 139;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <-6.873626> now;
+		turn torso to y-axis <-29.379121> now;
+		turn Head to y-axis <29.379121> now;
+		turn Head to z-axis <-11.252747> now;
+		turn ArmUL to y-axis <37.626374> now;
+		turn ArmUR to x-axis <-110.153846> now;
+		turn ArmUR to y-axis <-24.675824> now;
+		turn ArmLR to x-axis <-107.890110> now;
+		turn ArmLR to z-axis <14.159341> now;
+		turn HandR to x-axis <20.434066> now;
+		turn HandR to y-axis <-29.670330> now;
+		turn ArmLL to z-axis <-18.835165> now;
+		turn HandL to x-axis <2.434066> now;
+		turn HandL to y-axis <-4.829670> now;
+		sleep 137;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <2.500000> now;
+		turn torso to y-axis <2.500000> now;
+		turn Head to y-axis <-2.500000> now;
+		turn Head to z-axis <0.000000> now;
+		turn ArmUL to y-axis <11.252747> now;
+		turn ArmUR to x-axis <-122.120879> now;
+		turn ArmUR to y-axis <-3.296703> now;
+		turn ArmLR to x-axis <-57.780220> now;
+		turn ArmLR to z-axis <-15.549451> now;
+		turn HandR to x-axis <30.065934> now;
+		turn HandR to y-axis <-5.796703> now;
+		turn ArmLL to y-axis <-2.461538> now;
+		turn ArmLL to z-axis <-14.747253> now;
+		turn HandL to x-axis <-3.670330> now;
+		turn HandL to y-axis <1.714286> now;
+		sleep 52;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <8.747253> now;
+		turn torso to y-axis <23.752747> now;
+		turn Head to y-axis <-23.752747> now;
+		turn Head to z-axis <7.500000> now;
+		turn ArmUL to y-axis <-6.329670> now;
+		turn ArmUR to x-axis <-110.994505> now;
+		turn ArmUR to y-axis <-18.703297> now;
+		turn ArmLR to x-axis <-27.659341> now;
+		turn ArmLR to z-axis <-7.774725> now;
+		turn HandR to x-axis <36.478022> now;
+		turn HandR to y-axis <-2.901099> now;
+		turn ArmLL to y-axis <-1.230769> now;
+		turn ArmLL to z-axis <-12.021978> now;
+		turn HandL to x-axis <-9.736264> now;
+		turn HandL to y-axis <-0.829670> now;
+		sleep 52;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <15.000000> now;
+		turn torso to y-axis <45.010989> now;
+		turn Head to y-axis <-45.010989> now;
+		turn Head to z-axis <15.000000> now;
+		turn ArmUL to y-axis <-23.912088> now;
+		turn ArmUR to x-axis <-99.868132> now;
+		turn ArmUR to y-axis <-34.104396> now;
+		turn ArmLR to x-axis <2.461538> now;
+		turn ArmLR to z-axis <0.000000> now;
+		turn HandR to x-axis <42.901099> now;
+		turn HandR to y-axis <0.000000> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to y-axis <0.000000> now;
+		turn ArmLL to z-axis <-9.296703> now;
+		turn HandL to x-axis <-15.802198> now;
+		turn HandL to y-axis <-3.379121> now;
+		hide hammer;
+		hide hammer10;
+		if( !kill_attack )
+		{
+			set WEAPON_LAUNCH_NOW to weapon;
+			play-sound( "SWSWISH3", PLAYSOUND_PRIORITY_BATTLE );
+		}
+		sleep 73;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <10.153846> now;
+		turn torso to y-axis <28.956044> now;
+		turn Head to y-axis <-24.615385> now;
+		turn Head to z-axis <8.203297> now;
+		turn ArmUL to y-axis <-13.071429> now;
+		turn ArmUR to x-axis <-55.598901> now;
+		turn ArmUR to y-axis <-18.653846> now;
+		turn ArmUR to z-axis <-2.637363> now;
+		turn ArmLR to x-axis <1.340659> now;
+		turn HandR to x-axis <31.269231> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to z-axis <-9.615385> now;
+		turn HandL to x-axis <-11.406593> now;
+		turn HandL to y-axis <-1.785714> now;
+		sleep 80;
+	}
+	if( ( !busy_dying ) AND ( !kill_attack ) )
+	{
+		turn torso to x-axis <2.027473> now;
+		turn torso to y-axis <5.791209> now;
+		turn Head to y-axis <-4.923077> now;
+		turn Head to z-axis <1.637363> now;
+		turn ArmUL to y-axis <-2.609890> now;
+		turn ArmUR to x-axis <-11.115385> now;
+		turn ArmUR to y-axis <-3.725275> now;
+		turn ArmUR to z-axis <-0.527473> now;
+		turn ArmLR to x-axis <0.263736> now;
+		turn HandR to x-axis <20.032967> now;
+		turn ArmLL to z-axis <-9.923077> now;
+		turn HandL to x-axis <-3.670330> now;
+		turn HandL to y-axis <-0.247253> now;
+		sleep 83;
+	}
+	return;
+}
+
+restore_x()
+{
+	move Hip to x-axis [0.000000] speed [500.000000];
+	turn Hip to x-axis <0.000000> speed <500.120879>;
+	move Hip to y-axis [0.000000] speed [500.000000];
+	turn Hip to y-axis <0.000000> speed <500.120879>;
+	move Hip to z-axis [0.000000] speed [500.000000];
+	turn Hip to z-axis <0.000000> speed <500.120879>;
+	move LegUL to x-axis [0.000000] speed [500.000000];
+	turn LegUL to x-axis <0.000000> speed <500.120879>;
+	move LegUL to y-axis [0.000000] speed [500.000000];
+	turn LegUL to y-axis <0.000000> speed <500.120879>;
+	move LegUL to z-axis [0.000000] speed [500.000000];
+	turn LegUL to z-axis <0.000000> speed <500.120879>;
+	move LegUR to x-axis [0.000000] speed [500.000000];
+	turn LegUR to x-axis <0.000000> speed <500.120879>;
+	move LegUR to y-axis [0.000000] speed [500.000000];
+	turn LegUR to y-axis <0.000000> speed <500.120879>;
+	move LegUR to z-axis [0.000000] speed [500.000000];
+	turn LegUR to z-axis <0.000000> speed <500.120879>;
+	move torso to x-axis [0.000000] speed [500.000000];
+	turn torso to x-axis <0.000000> speed <500.120879>;
+	move torso to y-axis [0.000000] speed [500.000000];
+	turn torso to y-axis <0.000000> speed <500.120879>;
+	move torso to z-axis [0.000000] speed [500.000000];
+	turn torso to z-axis <0.000000> speed <500.120879>;
+	move Head to x-axis [0.000000] speed [500.000000];
+	turn Head to x-axis <0.000000> speed <500.120879>;
+	move Head to y-axis [0.000000] speed [500.000000];
+	turn Head to y-axis <0.000000> speed <500.120879>;
+	move Head to z-axis [0.000000] speed [500.000000];
+	turn Head to z-axis <0.000000> speed <500.120879>;
+	move ArmUL to x-axis [0.000000] speed [500.000000];
+	turn ArmUL to x-axis <-2.000000> speed <500.120879>;
+	move ArmUL to y-axis [0.000000] speed [500.000000];
+	turn ArmUL to y-axis <0.000000> speed <500.120879>;
+	move ArmUL to z-axis [0.000000] speed [500.000000];
+	turn ArmUL to z-axis <0.000000> speed <500.120879>;
+	move ArmUR to x-axis [0.000000] speed [500.000000];
+	turn ArmUR to x-axis <0.000000> speed <500.120879>;
+	move ArmUR to y-axis [0.000000] speed [500.000000];
+	turn ArmUR to y-axis <0.000000> speed <500.120879>;
+	move ArmUR to z-axis [0.000000] speed [500.000000];
+	turn ArmUR to z-axis <0.000000> speed <500.120879>;
+	move bloodl to x-axis [0.000000] speed [500.000000];
+	turn bloodl to x-axis <0.000000> speed <500.120879>;
+	move bloodl to y-axis [0.000000] speed [500.000000];
+	turn bloodl to y-axis <0.000000> speed <500.120879>;
+	move bloodl to z-axis [0.000000] speed [500.000000];
+	turn bloodl to z-axis <0.000000> speed <500.120879>;
+	move bloodm to x-axis [0.000000] speed [500.000000];
+	turn bloodm to x-axis <0.000000> speed <500.120879>;
+	move bloodm to y-axis [0.000000] speed [500.000000];
+	turn bloodm to y-axis <0.000000> speed <500.120879>;
+	move bloodm to z-axis [0.000000] speed [500.000000];
+	turn bloodm to z-axis <0.000000> speed <500.120879>;
+	move bloodr to x-axis [0.000000] speed [500.000000];
+	turn bloodr to x-axis <0.000000> speed <500.120879>;
+	move bloodr to y-axis [0.000000] speed [500.000000];
+	turn bloodr to y-axis <0.000000> speed <500.120879>;
+	move bloodr to z-axis [0.000000] speed [500.000000];
+	turn bloodr to z-axis <0.000000> speed <500.120879>;
+	move Torso5 to x-axis [0.000000] speed [500.000000];
+	turn Torso5 to x-axis <0.000000> speed <500.120879>;
+	move Torso5 to y-axis [0.000000] speed [500.000000];
+	turn Torso5 to y-axis <0.000000> speed <500.120879>;
+	move Torso5 to z-axis [0.000000] speed [500.000000];
+	turn Torso5 to z-axis <0.000000> speed <500.120879>;
+	move ArmLR to x-axis [0.000000] speed [500.000000];
+	turn ArmLR to x-axis <0.000000> speed <500.120879>;
+	move ArmLR to y-axis [0.000000] speed [500.000000];
+	turn ArmLR to y-axis <-5.000000> speed <500.120879>;
+	move ArmLR to z-axis [0.000000] speed [500.000000];
+	turn ArmLR to z-axis <0.000000> speed <500.120879>;
+	move HandR to x-axis [0.000000] speed [500.000000];
+	turn HandR to x-axis <17.230769> speed <500.120879>;
+	move HandR to y-axis [0.000000] speed [500.000000];
+	turn HandR to y-axis <0.000000> speed <500.120879>;
+	move HandR to z-axis [0.000000] speed [500.000000];
+	turn HandR to z-axis <0.000000> speed <500.120879>;
+	move hammer to x-axis [0.000000] speed [500.000000];
+	turn hammer to x-axis <0.000000> speed <500.120879>;
+	move hammer to y-axis [0.000000] speed [500.000000];
+	turn hammer to y-axis <0.000000> speed <500.120879>;
+	move hammer to z-axis [0.000000] speed [500.000000];
+	turn hammer to z-axis <0.000000> speed <500.120879>;
+	move HammerEmit to x-axis [0.000000] speed [500.000000];
+	turn HammerEmit to x-axis <0.000000> speed <500.120879>;
+	move HammerEmit to y-axis [0.000000] speed [500.000000];
+	turn HammerEmit to y-axis <0.000000> speed <500.120879>;
+	move HammerEmit to z-axis [0.000000] speed [500.000000];
+	turn HammerEmit to z-axis <0.000000> speed <500.120879>;
+	move hammer10 to x-axis [0.000000] speed [500.000000];
+	turn hammer10 to x-axis <0.000000> speed <500.120879>;
+	move hammer10 to y-axis [0.000000] speed [500.000000];
+	turn hammer10 to y-axis <0.000000> speed <500.120879>;
+	move hammer10 to z-axis [0.000000] speed [500.000000];
+	turn hammer10 to z-axis <0.000000> speed <500.120879>;
+	move ArmLL to x-axis [0.000000] speed [500.000000];
+	turn ArmLL to x-axis <-86.505495> speed <500.120879>;
+	move ArmLL to y-axis [0.000000] speed [500.000000];
+	turn ArmLL to y-axis <0.000000> speed <500.120879>;
+	move ArmLL to z-axis [0.000000] speed [500.000000];
+	turn ArmLL to z-axis <-10.000000> speed <500.120879>;
+	move HandL to x-axis [0.000000] speed [500.000000];
+	turn HandL to x-axis <-1.736264> speed <500.120879>;
+	move HandL to y-axis [0.000000] speed [500.000000];
+	turn HandL to y-axis <0.131868> speed <500.120879>;
+	move HandL to z-axis [0.000000] speed [500.000000];
+	turn HandL to z-axis <0.000000> speed <500.120879>;
+	move Pole to x-axis [0.000000] speed [500.000000];
+	turn Pole to x-axis <0.000000> speed <500.120879>;
+	move Pole to y-axis [0.000000] speed [500.000000];
+	turn Pole to y-axis <0.000000> speed <500.120879>;
+	move Pole to z-axis [0.000000] speed [500.000000];
+	turn Pole to z-axis <0.000000> speed <500.120879>;
+	move LegLR to x-axis [0.000000] speed [500.000000];
+	turn LegLR to x-axis <0.000000> speed <500.120879>;
+	move LegLR to y-axis [0.000000] speed [500.000000];
+	turn LegLR to y-axis <0.000000> speed <500.120879>;
+	move LegLR to z-axis [0.000000] speed [500.000000];
+	turn LegLR to z-axis <0.000000> speed <500.120879>;
+	move FootR to x-axis [0.000000] speed [500.000000];
+	turn FootR to x-axis <0.000000> speed <500.120879>;
+	move FootR to y-axis [0.000000] speed [500.000000];
+	turn FootR to y-axis <0.000000> speed <500.120879>;
+	move FootR to z-axis [0.000000] speed [500.000000];
+	turn FootR to z-axis <0.000000> speed <500.120879>;
+	move LegLR5 to x-axis [0.000000] speed [500.000000];
+	turn LegLR5 to x-axis <0.000000> speed <500.120879>;
+	move LegLR5 to y-axis [0.000000] speed [500.000000];
+	turn LegLR5 to y-axis <0.000000> speed <500.120879>;
+	move LegLR5 to z-axis [0.000000] speed [500.000000];
+	turn LegLR5 to z-axis <0.000000> speed <500.120879>;
+	move waker to x-axis [0.000000] speed [500.000000];
+	turn waker to x-axis <0.000000> speed <500.120879>;
+	move waker to y-axis [0.000000] speed [500.000000];
+	turn waker to y-axis <0.000000> speed <500.120879>;
+	move waker to z-axis [0.000000] speed [500.000000];
+	turn waker to z-axis <0.000000> speed <500.120879>;
+	move LegLL to x-axis [0.000000] speed [500.000000];
+	turn LegLL to x-axis <0.000000> speed <500.120879>;
+	move LegLL to y-axis [0.000000] speed [500.000000];
+	turn LegLL to y-axis <0.000000> speed <500.120879>;
+	move LegLL to z-axis [0.000000] speed [500.000000];
+	turn LegLL to z-axis <0.000000> speed <500.120879>;
+	move FootL to x-axis [0.000000] speed [500.000000];
+	turn FootL to x-axis <0.000000> speed <500.120879>;
+	move FootL to y-axis [0.000000] speed [500.000000];
+	turn FootL to y-axis <0.000000> speed <500.120879>;
+	move FootL to z-axis [0.000000] speed [500.000000];
+	turn FootL to z-axis <0.000000> speed <500.120879>;
+	move LegLL5 to x-axis [0.000000] speed [500.000000];
+	turn LegLL5 to x-axis <0.000000> speed <500.120879>;
+	move LegLL5 to y-axis [0.000000] speed [500.000000];
+	turn LegLL5 to y-axis <0.000000> speed <500.120879>;
+	move LegLL5 to z-axis [0.000000] speed [500.000000];
+	turn LegLL5 to z-axis <0.000000> speed <500.120879>;
+	move wakel to x-axis [0.000000] speed [500.000000];
+	turn wakel to x-axis <0.000000> speed <500.120879>;
+	move wakel to y-axis [0.000000] speed [500.000000];
+	turn wakel to y-axis <0.000000> speed <500.120879>;
+	move wakel to z-axis [0.000000] speed [500.000000];
+	turn wakel to z-axis <0.000000> speed <500.120879>;
+	return;
+}
+
+restore_legs()
+{
+	move Hip to x-axis [0.000000] speed [500.000000];
+	turn Hip to x-axis <0.000000> speed <500.120879>;
+	move Hip to y-axis [0.000000] speed [500.000000];
+	turn Hip to y-axis <0.000000> speed <500.120879>;
+	move Hip to z-axis [0.000000] speed [500.000000];
+	turn Hip to z-axis <0.000000> speed <500.120879>;
+	move LegUL to x-axis [0.000000] speed [500.000000];
+	turn LegUL to x-axis <0.000000> speed <500.120879>;
+	move LegUL to y-axis [0.000000] speed [500.000000];
+	turn LegUL to y-axis <0.000000> speed <500.120879>;
+	move LegUL to z-axis [0.000000] speed [500.000000];
+	turn LegUL to z-axis <0.000000> speed <500.120879>;
+	move LegUR to x-axis [0.000000] speed [500.000000];
+	turn LegUR to x-axis <0.000000> speed <500.120879>;
+	move LegUR to y-axis [0.000000] speed [500.000000];
+	turn LegUR to y-axis <0.000000> speed <500.120879>;
+	move LegUR to z-axis [0.000000] speed [500.000000];
+	turn LegUR to z-axis <0.000000> speed <500.120879>;
+	move LegLR to x-axis [0.000000] speed [500.000000];
+	turn LegLR to x-axis <0.000000> speed <500.120879>;
+	move LegLR to y-axis [0.000000] speed [500.000000];
+	turn LegLR to y-axis <0.000000> speed <500.120879>;
+	move LegLR to z-axis [0.000000] speed [500.000000];
+	turn LegLR to z-axis <0.000000> speed <500.120879>;
+	move FootR to x-axis [0.000000] speed [500.000000];
+	turn FootR to x-axis <0.000000> speed <500.120879>;
+	move FootR to y-axis [0.000000] speed [500.000000];
+	turn FootR to y-axis <0.000000> speed <500.120879>;
+	move FootR to z-axis [0.000000] speed [500.000000];
+	turn FootR to z-axis <0.000000> speed <500.120879>;
+	move LegLR5 to x-axis [0.000000] speed [500.000000];
+	turn LegLR5 to x-axis <0.000000> speed <500.120879>;
+	move LegLR5 to y-axis [0.000000] speed [500.000000];
+	turn LegLR5 to y-axis <0.000000> speed <500.120879>;
+	move LegLR5 to z-axis [0.000000] speed [500.000000];
+	turn LegLR5 to z-axis <0.000000> speed <500.120879>;
+	move waker to x-axis [0.000000] speed [500.000000];
+	turn waker to x-axis <0.000000> speed <500.120879>;
+	move waker to y-axis [0.000000] speed [500.000000];
+	turn waker to y-axis <0.000000> speed <500.120879>;
+	move waker to z-axis [0.000000] speed [500.000000];
+	turn waker to z-axis <0.000000> speed <500.120879>;
+	move LegLL to x-axis [0.000000] speed [500.000000];
+	turn LegLL to x-axis <0.000000> speed <500.120879>;
+	move LegLL to y-axis [0.000000] speed [500.000000];
+	turn LegLL to y-axis <0.000000> speed <500.120879>;
+	move LegLL to z-axis [0.000000] speed [500.000000];
+	turn LegLL to z-axis <0.000000> speed <500.120879>;
+	move FootL to x-axis [0.000000] speed [500.000000];
+	turn FootL to x-axis <0.000000> speed <500.120879>;
+	move FootL to y-axis [0.000000] speed [500.000000];
+	turn FootL to y-axis <0.000000> speed <500.120879>;
+	move FootL to z-axis [0.000000] speed [500.000000];
+	turn FootL to z-axis <0.000000> speed <500.120879>;
+	move LegLL5 to x-axis [0.000000] speed [500.000000];
+	turn LegLL5 to x-axis <0.000000> speed <500.120879>;
+	move LegLL5 to y-axis [0.000000] speed [500.000000];
+	turn LegLL5 to y-axis <0.000000> speed <500.120879>;
+	move LegLL5 to z-axis [0.000000] speed [500.000000];
+	turn LegLL5 to z-axis <0.000000> speed <500.120879>;
+	move wakel to x-axis [0.000000] speed [500.000000];
+	turn wakel to x-axis <0.000000> speed <500.120879>;
+	move wakel to y-axis [0.000000] speed [500.000000];
+	turn wakel to y-axis <0.000000> speed <500.120879>;
+	move wakel to z-axis [0.000000] speed [500.000000];
+	turn wakel to z-axis <0.000000> speed <500.120879>;
+	return;
+}
+
+flag()
+{
+	while( TRUE )
+	{
+		if( TRUE )
+		{
+			move Pole to y-axis [0.000000] now;
+			turn Flag1 to z-axis <0.000000> now;
+			turn Flag2 to z-axis <-9.000000> now;
+			turn Flag3 to z-axis <-9.000000> now;
+			sleep 74;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <3.500000> now;
+			turn Flag2 to z-axis <-8.000000> now;
+			turn Flag3 to z-axis <-9.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <7.000000> now;
+			turn Flag2 to z-axis <-7.000000> now;
+			turn Flag3 to z-axis <-10.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <8.000000> now;
+			turn Flag2 to z-axis <-3.500000> now;
+			turn Flag3 to z-axis <-9.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <9.000000> now;
+			turn Flag2 to z-axis <0.000000> now;
+			turn Flag3 to z-axis <-9.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <9.500000> now;
+			turn Flag2 to z-axis <3.500000> now;
+			turn Flag3 to z-axis <-8.000000> now;
+			sleep 76;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <10.000000> now;
+			turn Flag2 to z-axis <7.000000> now;
+			turn Flag3 to z-axis <-7.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <9.500000> now;
+			turn Flag2 to z-axis <8.000000> now;
+			turn Flag3 to z-axis <-3.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <9.000000> now;
+			turn Flag2 to z-axis <9.000000> now;
+			turn Flag3 to z-axis <0.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <8.000000> now;
+			turn Flag2 to z-axis <9.500000> now;
+			turn Flag3 to z-axis <3.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <7.000000> now;
+			turn Flag2 to z-axis <10.000000> now;
+			turn Flag3 to z-axis <7.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <3.500000> now;
+			turn Flag2 to z-axis <9.500000> now;
+			turn Flag3 to z-axis <8.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <0.000000> now;
+			turn Flag2 to z-axis <9.000000> now;
+			turn Flag3 to z-axis <9.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-3.500000> now;
+			turn Flag2 to z-axis <8.000000> now;
+			turn Flag3 to z-axis <9.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-7.000000> now;
+			turn Flag2 to z-axis <7.000000> now;
+			turn Flag3 to z-axis <10.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-8.000000> now;
+			turn Flag2 to z-axis <3.500000> now;
+			turn Flag3 to z-axis <9.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-9.000000> now;
+			turn Flag2 to z-axis <0.000000> now;
+			turn Flag3 to z-axis <9.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-9.500000> now;
+			turn Flag2 to z-axis <-3.500000> now;
+			turn Flag3 to z-axis <8.000000> now;
+			sleep 76;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-10.000000> now;
+			turn Flag2 to z-axis <-7.000000> now;
+			turn Flag3 to z-axis <7.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-9.500000> now;
+			turn Flag2 to z-axis <-8.000000> now;
+			turn Flag3 to z-axis <3.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-9.000000> now;
+			turn Flag2 to z-axis <-9.000000> now;
+			turn Flag3 to z-axis <0.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-8.000000> now;
+			turn Flag2 to z-axis <-9.500000> now;
+			turn Flag3 to z-axis <-3.500000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-7.000000> now;
+			turn Flag2 to z-axis <-10.000000> now;
+			turn Flag3 to z-axis <-7.000000> now;
+			sleep 75;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to z-axis <-3.500000> now;
+			turn Flag2 to z-axis <-9.500000> now;
+			turn Flag3 to z-axis <-8.000000> now;
+			sleep 75;
+		}
+	}
+	return;
+}
+
+death()
+{
+	if( TRUE )
+	{
+		turn ArmUL to x-axis <-2.000000> now;
+		turn ArmLR to y-axis <-5.000000> now;
+		turn HandR to x-axis <17.230769> now;
+		turn ArmLL to x-axis <-86.505495> now;
+		turn ArmLL to z-axis <-10.000000> now;
+		turn HandL to x-axis <-1.736264> now;
+		turn HandL to y-axis <0.131868> now;
+		sleep 54;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-0.012500] now;
+		move Hip to z-axis [-0.050000] now;
+		turn Hip to x-axis <-3.000000> now;
+		turn LegUL to x-axis <3.000000> now;
+		turn LegUR to x-axis <-1.478022> now;
+		turn torso to x-axis <-5.010989> now;
+		turn Head to x-axis <13.186813> now;
+		turn ArmUL to x-axis <-3.934066> now;
+		turn ArmUR to x-axis <0.791209> now;
+		turn ArmLR to x-axis <1.406593> now;
+		turn HandR to x-axis <20.395604> now;
+		turn ArmLL to x-axis <-76.483516> now;
+		turn LegLR to x-axis <7.824176> now;
+		turn FootR to x-axis <2.280220> now;
+		sleep 59;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-0.025000] now;
+		move Hip to z-axis [-0.100000] now;
+		turn Hip to x-axis <-6.000000> now;
+		turn LegUL to x-axis <6.000000> now;
+		turn LegUR to x-axis <-2.961538> now;
+		turn torso to x-axis <-10.016484> now;
+		turn Head to x-axis <26.373626> now;
+		turn ArmUL to x-axis <-5.868132> now;
+		turn ArmUR to x-axis <1.576923> now;
+		turn ArmLR to x-axis <2.813187> now;
+		turn HandR to x-axis <23.560440> now;
+		turn ArmLL to x-axis <-66.461538> now;
+		turn LegLR to x-axis <15.642857> now;
+		turn FootR to x-axis <4.565934> now;
+		sleep 59;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-0.037500] now;
+		move Hip to z-axis [-0.150000] now;
+		turn Hip to x-axis <-9.000000> now;
+		turn LegUL to x-axis <9.000000> now;
+		turn LegUR to x-axis <-4.445055> now;
+		turn torso to x-axis <-15.032967> now;
+		turn Head to x-axis <39.554945> now;
+		turn ArmUL to x-axis <-7.802198> now;
+		turn ArmUR to x-axis <2.373626> now;
+		turn ArmLR to x-axis <4.219780> now;
+		turn HandR to x-axis <26.725275> now;
+		turn ArmLL to x-axis <-56.434066> now;
+		turn LegLR to x-axis <23.472527> now;
+		turn FootR to x-axis <6.857143> now;
+		sleep 59;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-0.050000] now;
+		move Hip to z-axis [-0.200000] now;
+		turn Hip to x-axis <-12.000000> now;
+		turn LegUL to x-axis <12.000000> now;
+		turn LegUR to x-axis <-5.928571> now;
+		turn torso to x-axis <-20.043956> now;
+		turn Head to x-axis <52.747253> now;
+		turn ArmUL to x-axis <-9.736264> now;
+		turn ArmUR to x-axis <3.164835> now;
+		turn ArmLR to x-axis <5.626374> now;
+		turn HandR to x-axis <29.884615> now;
+		turn ArmLL to x-axis <-46.417582> now;
+		turn LegLR to x-axis <31.291209> now;
+		turn FootR to x-axis <9.142857> now;
+		sleep 59;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-0.737500] now;
+		move Hip to z-axis [-0.837500] now;
+		turn Hip to x-axis <-19.000000> now;
+		turn LegUL to x-axis <4.175824> now;
+		turn LegUR to x-axis <-17.093407> now;
+		turn torso to x-axis <-12.219780> now;
+		turn Head to x-axis <33.758242> now;
+		turn ArmUL to x-axis <-15.450549> now;
+		turn ArmUL to z-axis <-0.527473> now;
+		turn ArmUR to x-axis <-3.604396> now;
+		turn ArmUR to z-axis <1.406593> now;
+		turn ArmLR to x-axis <0.527473> now;
+		turn ArmLL to x-axis <-43.604396> now;
+		turn ArmLL to z-axis <-12.373626> now;
+		turn LegLR to x-axis <36.038462> now;
+		turn FootR to x-axis <6.857143> now;
+		turn LegLL to x-axis <17.752747> now;
+		turn FootL to x-axis <-3.076923> now;
+		sleep 55;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-1.425000] now;
+		move Hip to z-axis [-1.475000] now;
+		turn Hip to x-axis <-26.005495> now;
+		turn LegUL to x-axis <-3.642857> now;
+		turn LegUR to x-axis <-28.258242> now;
+		turn torso to x-axis <-4.390110> now;
+		turn Head to x-axis <14.769231> now;
+		turn ArmUL to x-axis <-21.164835> now;
+		turn ArmUL to z-axis <-1.054945> now;
+		turn ArmUR to x-axis <-10.373626> now;
+		turn ArmUR to z-axis <2.813187> now;
+		turn ArmLR to x-axis <-4.571429> now;
+		turn ArmLL to x-axis <-40.791209> now;
+		turn ArmLL to z-axis <-14.747253> now;
+		turn LegLR to x-axis <40.791209> now;
+		turn FootR to x-axis <4.565934> now;
+		turn LegLL to x-axis <35.510989> now;
+		turn FootL to x-axis <-6.153846> now;
+		sleep 54;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-2.112500] now;
+		move Hip to z-axis [-2.112494] now;
+		turn Hip to x-axis <-33.005495> now;
+		turn LegUL to x-axis <-11.467033> now;
+		turn LegUR to x-axis <-39.423077> now;
+		turn torso to x-axis <3.423077> now;
+		turn Head to x-axis <-4.219780> now;
+		turn ArmUL to x-axis <-26.879121> now;
+		turn ArmUL to z-axis <-1.576923> now;
+		turn ArmUR to x-axis <-17.142857> now;
+		turn ArmUR to z-axis <4.219780> now;
+		turn ArmLR to x-axis <-9.670330> now;
+		turn ArmLL to x-axis <-37.978022> now;
+		turn ArmLL to z-axis <-17.120879> now;
+		turn LegLR to x-axis <45.538462> now;
+		turn FootR to x-axis <2.280220> now;
+		turn LegLL to x-axis <53.274725> now;
+		turn FootL to x-axis <-9.230769> now;
+		sleep 55;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-2.800000] now;
+		move Hip to z-axis [-2.749994] now;
+		turn Hip to x-axis <-40.005495> now;
+		turn LegUL to x-axis <-19.291209> now;
+		turn LegUR to x-axis <-50.587912> now;
+		turn torso to x-axis <11.252747> now;
+		turn Head to x-axis <-23.208791> now;
+		turn ArmUL to x-axis <-32.593407> now;
+		turn ArmUL to z-axis <-2.109890> now;
+		turn ArmUR to x-axis <-23.912088> now;
+		turn ArmUR to z-axis <5.626374> now;
+		turn ArmLR to x-axis <-14.769231> now;
+		turn ArmLL to x-axis <-35.164835> now;
+		turn ArmLL to z-axis <-19.494505> now;
+		turn LegLR to x-axis <50.285714> now;
+		turn FootR to x-axis <0.000000> now;
+		turn LegLL to x-axis <71.032967> now;
+		turn FootL to x-axis <-12.302198> now;
+		sleep 50;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-3.637500] now;
+		move Hip to z-axis [-3.162494] now;
+		turn LegUL to x-axis <-35.027473> now;
+		turn LegUR to x-axis <-59.027473> now;
+		turn Head to x-axis <-17.846154> now;
+		turn ArmUL to x-axis <-32.857143> now;
+		turn ArmUL to z-axis <-2.543956> now;
+		turn ArmUR to x-axis <-23.736264> now;
+		turn ArmUR to z-axis <7.560440> now;
+		turn ArmLR to x-axis <-18.549451> now;
+		turn ArmLR to z-axis <1.840659> now;
+		turn HandR to y-axis <7.560440> now;
+		turn ArmLL to x-axis <-44.395604> now;
+		turn ArmLL to z-axis <-24.593407> now;
+		turn HandL to x-axis <-3.758242> now;
+		turn LegLR to x-axis <46.241758> now;
+		turn LegLL to x-axis <78.939560> now;
+		turn FootL to x-axis <-4.307692> now;
+		sleep 50;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-4.475000] now;
+		move Hip to z-axis [-3.575000] now;
+		turn LegUL to x-axis <-50.763736> now;
+		turn LegUR to x-axis <-67.467033> now;
+		turn Head to x-axis <-12.483516> now;
+		turn ArmUL to x-axis <-33.120879> now;
+		turn ArmUL to z-axis <-2.983516> now;
+		turn ArmUR to x-axis <-23.560440> now;
+		turn ArmUR to z-axis <9.494505> now;
+		turn ArmLR to x-axis <-22.329670> now;
+		turn ArmLR to z-axis <3.686813> now;
+		turn HandR to y-axis <15.120879> now;
+		turn ArmLL to x-axis <-53.620879> now;
+		turn ArmLL to z-axis <-29.692308> now;
+		turn HandL to x-axis <-5.780220> now;
+		turn LegLR to x-axis <42.197802> now;
+		turn LegLL to x-axis <86.851648> now;
+		turn FootL to x-axis <3.686813> now;
+		sleep 50;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-5.312500] now;
+		move Hip to z-axis [-3.987500] now;
+		turn LegUL to x-axis <-66.500000> now;
+		turn LegUR to x-axis <-75.906593> now;
+		turn Head to x-axis <-7.120879> now;
+		turn ArmUL to x-axis <-33.384615> now;
+		turn ArmUL to z-axis <-3.423077> now;
+		turn ArmUR to x-axis <-23.379121> now;
+		turn ArmUR to z-axis <11.423077> now;
+		turn ArmLR to x-axis <-26.109890> now;
+		turn ArmLR to z-axis <5.532967> now;
+		turn HandR to y-axis <22.675824> now;
+		turn ArmLL to x-axis <-62.857143> now;
+		turn ArmLL to z-axis <-34.791209> now;
+		turn HandL to x-axis <-7.802198> now;
+		turn LegLR to x-axis <38.148352> now;
+		turn LegLL to x-axis <94.769231> now;
+		turn FootL to x-axis <11.686813> now;
+		sleep 36;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-6.150000] now;
+		move Hip to z-axis [-4.400000] now;
+		turn LegUL to x-axis <-82.236264> now;
+		turn LegUR to x-axis <-84.346154> now;
+		turn Head to x-axis <-1.752747> now;
+		turn ArmUL to x-axis <-33.648352> now;
+		turn ArmUL to z-axis <-3.868132> now;
+		turn ArmUR to x-axis <-23.208791> now;
+		turn ArmUR to z-axis <13.362637> now;
+		turn ArmLR to x-axis <-29.884615> now;
+		turn ArmLR to z-axis <7.384615> now;
+		turn HandR to y-axis <30.241758> now;
+		turn ArmLL to x-axis <-72.087912> now;
+		turn ArmLL to z-axis <-39.890110> now;
+		turn HandL to x-axis <-9.824176> now;
+		turn LegLR to x-axis <34.109890> now;
+		turn LegLL to x-axis <102.681319> now;
+		turn FootL to x-axis <19.692308> now;
+		sleep 37;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-6.737500] now;
+		move Hip to z-axis [-4.712500] now;
+		move ArmLR to y-axis [0.100000] now;
+		turn Hip to x-axis <-50.203297> now;
+		turn LegUL to x-axis <-71.686813> now;
+		turn LegUL to z-axis <-1.054945> now;
+		turn LegUR to x-axis <-66.060440> now;
+		turn LegUR to z-axis <1.934066> now;
+		turn torso to x-axis <5.532967> now;
+		turn Head to x-axis <-4.747253> now;
+		turn Head to y-axis <19.862637> now;
+		turn ArmUL to x-axis <-29.164835> now;
+		turn ArmUL to z-axis <-2.901099> now;
+		turn ArmUR to x-axis <-18.016484> now;
+		turn ArmUR to z-axis <15.736264> now;
+		turn ArmLR to x-axis <-19.159341> now;
+		turn ArmLR to z-axis <9.049451> now;
+		turn HandR to x-axis <30.412088> now;
+		turn HandR to y-axis <45.620879> now;
+		turn ArmLL to z-axis <-51.846154> now;
+		turn HandL to x-axis <-9.824176> now;
+		turn LegLR to x-axis <27.335165> now;
+		turn LegLR to z-axis <0.527473> now;
+		turn LegLL to x-axis <89.582418> now;
+		turn FootL to x-axis <25.752747> now;
+		sleep 36;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-7.325000] now;
+		move Hip to z-axis [-5.025000] now;
+		move ArmLR to y-axis [0.200000] now;
+		turn Hip to x-axis <-60.401099> now;
+		turn LegUL to x-axis <-61.137363> now;
+		turn LegUL to z-axis <-2.109890> now;
+		turn LegUR to x-axis <-47.774725> now;
+		turn LegUR to z-axis <3.862637> now;
+		turn torso to x-axis <-0.170330> now;
+		turn Head to x-axis <-7.736264> now;
+		turn Head to y-axis <39.736264> now;
+		turn ArmUL to x-axis <-24.681319> now;
+		turn ArmUL to z-axis <-1.934066> now;
+		turn ArmUR to x-axis <-12.829670> now;
+		turn ArmUR to z-axis <18.109890> now;
+		turn ArmLR to x-axis <-8.439560> now;
+		turn ArmLR to z-axis <10.719780> now;
+		turn HandR to x-axis <30.945055> now;
+		turn HandR to y-axis <61.010989> now;
+		turn ArmLL to z-axis <-63.802198> now;
+		turn HandL to x-axis <-9.824176> now;
+		turn LegLR to x-axis <20.565934> now;
+		turn LegLR to z-axis <1.054945> now;
+		turn LegLL to x-axis <76.483516> now;
+		turn FootL to x-axis <31.818681> now;
+		sleep 36;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-7.912500] now;
+		move Hip to z-axis [-5.337500] now;
+		move ArmLR to y-axis [0.300000] now;
+		turn Hip to x-axis <-70.598901> now;
+		turn LegUL to x-axis <-50.587912> now;
+		turn LegUL to z-axis <-3.164835> now;
+		turn LegUR to x-axis <-29.489011> now;
+		turn LegUR to z-axis <5.796703> now;
+		turn torso to x-axis <-5.890110> now;
+		turn Head to x-axis <-10.719780> now;
+		turn Head to y-axis <59.604396> now;
+		turn ArmUL to x-axis <-20.197802> now;
+		turn ArmUL to z-axis <-0.967033> now;
+		turn ArmUR to x-axis <-7.642857> now;
+		turn ArmUR to z-axis <20.483516> now;
+		turn ArmLR to x-axis <2.280220> now;
+		turn ArmLR to z-axis <12.390110> now;
+		turn HandR to x-axis <31.472527> now;
+		turn HandR to y-axis <76.390110> now;
+		turn ArmLL to z-axis <-75.758242> now;
+		turn HandL to x-axis <-9.824176> now;
+		turn LegLR to x-axis <13.796703> now;
+		turn LegLR to z-axis <1.576923> now;
+		turn LegLL to x-axis <63.384615> now;
+		turn FootL to x-axis <37.884615> now;
+		sleep 37;
+	}
+	if( TRUE )
+	{
+		move Hip to y-axis [-8.500000] now;
+		move Hip to z-axis [-5.650000] now;
+		move ArmLR to y-axis [0.400000] now;
+		turn Hip to x-axis <-80.796703> now;
+		turn LegUL to x-axis <-40.038462> now;
+		turn LegUL to z-axis <-4.219780> now;
+		turn LegUR to x-axis <-11.203297> now;
+		turn LegUR to z-axis <7.736264> now;
+		turn torso to x-axis <-11.604396> now;
+		turn Head to x-axis <-13.708791> now;
+		turn Head to y-axis <79.472527> now;
+		turn ArmUL to x-axis <-15.714286> now;
+		turn ArmUL to z-axis <0.000000> now;
+		turn ArmUR to x-axis <-2.456044> now;
+		turn ArmUR to z-axis <22.851648> now;
+		turn ArmLR to x-axis <13.010989> now;
+		turn ArmLR to z-axis <14.065934> now;
+		turn HandR to x-axis <31.994505> now;
+		turn HandR to y-axis <91.780220> now;
+		turn ArmLL to z-axis <-87.714286> now;
+		turn HandL to x-axis <-9.824176> now;
+		turn LegLR to x-axis <7.032967> now;
+		turn LegLR to z-axis <2.109890> now;
+		turn LegLL to x-axis <50.280220> now;
+		turn FootL to x-axis <43.950549> now;
+		sleep 9;
+	}
+	return;
+}
+
+BuildControl()
+{
+	while( TRUE )
+	{
+		if( building AND ( !aiming ) )
+		{
+			while( pause_loop )
+			{
+				sleep 100;
+			}
+			call-script build();
+		}
+		else
+		{
+			sleep 100;
+		}
+	}
+	return;
+}
+
+MoveWatcher()
+{
+	set-signal-mask SIG_MOVE;
+	while( TRUE )
+	{
+		moving = (get CURRENT_SPEED) > 5 OR direction;
+		sleep 100;
+		if( moving )
+		{
+			turn flagrot to z-axis <180.043956> speed <150.032967>;
+		}
+	}
+	return;
+}
+
+MeleeControl()
+{
+	while( TRUE )
+	{
+		if( moving )
+		{
+			if( firing )
+			{
+				call-script walk_legs();
+			}
+			else if( get IN_WATER )
+			{
+				call-script walk_water();
+			}
+			else if( get ON_ROAD )
+			{
+				call-script walk_road();
+			}
+			else
+			{
+				call-script walk();
+			}
+			legs_restored = FALSE;
+			restored = FALSE;
+		}
+		else if( !busy_dying )
+		{
+			if( !legs_restored )
+			{
+				call-script restore_legs();
+				legs_restored = TRUE;
+			}
+			else if( ( !restored ) AND ( !aiming ) AND ( !building ) )
+			{
+				call-script restore_x();
+				restored = TRUE;
+			}
+			else
+			{
+				sleep 100;
+			}
+		}
+		else
+		{
+			sleep 100;
+		}
+	}
+	return;
+}
+
+StatusControl()
+{
+	var Func_Var_1;
+	Func_Var_1 = 0;
+	while( Func_Var_1 < 2 )
+	{
+		vetlevel = get VETERAN_LEVEL;
+		if( Func_Var_1 == 0 )
+		{
+			if( vetlevel > 4 )
+			{
+				hide LegLL;
+				hide LegLR;
+				hide torso;
+				show LegLL5;
+				show LegLR5;
+				show Torso5;
+				++Func_Var_1;
+			}
+		}
+		else if( Func_Var_1 == 1 )
+		{
+			if( vetlevel > 9 )
+			{
+				if( !firing )
+				{
+					hide hammer;
+					show hammer10;
+				}
+				++Func_Var_1;
+			}
+		}
+		sleep 1000;
+	}
+	return;
+}
+
+Create()
+{
+	hide LegLL5;
+	hide LegLR5;
+	hide Torso5;
+	hide hammer10;
+	hide hammer;
+	move emitjim to x-axis [0.000000] now;
+	move emitjim to y-axis [15.500000] now;
+	move emitjim to z-axis [10.500000] now;
+	moving = FALSE;
+	aiming = FALSE;
+	firing = FALSE;
+	building = FALSE;
+	busy_dying = FALSE;
+	pause_loop = FALSE;
+	kill_attack = FALSE;
+	legs_restored = FALSE;
+	restored = FALSE;
+	direction = 0;
+	vetlevel = 0;
+	winddir = 0;
+	restore_delay = 5000;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+	start-script flag();
+	start-script BuildControl();
+	start-script MoveWatcher();
+	start-script MeleeControl();
+	start-script StatusControl();
+	return;
+}
+
+StartBuilding()
+{
+	set INBUILDSTANCE to 1;
+	building = TRUE;
+	if( !aiming )
+	{
+		pause_loop = TRUE;
+		call-script startbuild();
+		pause_loop = FALSE;
+		restored = FALSE;
+	}
+	return;
+}
+
+StopBuilding()
+{
+	set INBUILDSTANCE to 0;
+	building = FALSE;
+	return;
+}
+
+TurnDirection(dir)
+{
+	direction = dir;
+	return;
+}
+
+SetMaxReloadTime(time)
+{
+	restore_delay = time * 2;
+	return;
+}
+
+WindChange(windspeed, winddirection)
+{
+	signal SIG_WIND;
+	set-signal-mask SIG_WIND;
+	winddir = 32768 - winddirection;
+	turn flagrot to z-axis winddir speed <50.010989>;
+	return;
+}
+
+RestoreAfterDelay()
+{
+	signal SIG_RESTORE;
+	set-signal-mask SIG_RESTORE;
+	var Func_Var_1;
+	Func_Var_1 = 0;
+	while( Func_Var_1 < restore_delay )
+	{
+		if( kill_attack )
+		{
+			Func_Var_1 = restore_delay;
+		}
+		else
+		{
+			Func_Var_1 = Func_Var_1 + 100;
+		}
+		sleep 100;
+	}
+	while( firing )
+	{
+		sleep 100;
+	}
+	set WEAPON_AIM_ABORTED to 0;
+	aiming = FALSE;
+	if( building )
+	{
+		pause_loop = TRUE;
+		call-script startbuild();
+		pause_loop = FALSE;
+		restored = FALSE;
+	}
+	return;
+}
+
+AimWeapon(heading, pitch, weaponnum)
+{
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	aiming = TRUE;
+	while( firing )
+	{
+		sleep 100;
+	}
+	if( building )
+	{
+		call-script restore_x();
+		sleep 250;
+	}
+	start-script RestoreAfterDelay();
+	set WEAPON_READY to weaponnum;
+	return;
+}
+
+FireWeapon(weaponnum)
+{
+	firing = TRUE;
+	kill_attack = FALSE;
+	call-script attack1(weaponnum);
+	firing = FALSE;
+	return;
+}
+
+TargetCleared(weaponnum)
+{
+	set WEAPON_AIM_ABORTED to weaponnum;
+	kill_attack = TRUE;
+	signal SIG_AIM;
+	return;
+}
+
+QueryWeapon(piecenum, weaponnum)
+{
+	piecenum = emitjim;
+	return;
+}
+
+SweetSpot(piecenum)
+{
+	piecenum = torso;
+	return;
+}
+
+QueryBlood(piecenum)
+{
+	piecenum = 2 + Rand( 0, 2 );
+	return;
+}
+
+Dying(damagetype)
+{
+	set-signal-mask 0;
+	signal SIG_AIM;
+	signal SIG_MOVE;
+	signal SIG_RESTORE;
+	moving = FALSE;
+	busy_dying = TRUE;
+	if( damagetype != 3 )
+	{
+		if( Rand( 1, 4 ) == 1 )
+		{
+			play-sound( "ARABUILDDIE1", PLAYSOUND_PRIORITY_BATTLE );
+		}
+		call-script death();
+		explode Hip type EXPTYPE_SMALLSMOKE | BITMAPONLY;
+	}
+	set FINISHED_DYING to 1;
+	return;
+}
+
+Killed(severity, corpsetype, damagetype)
+{
+	if( damagetype == 3 )
+	{
+		corpsetype = 0;
+		explode Head type FALL;
+		explode ArmUR type FALL;
+		explode ArmUL type FALL;
+		explode ArmLR type FALL;
+		explode ArmLL type FALL;
+		explode torso type FALL | EXPTYPE_BLOODEXPLOSION;
+		explode LegUL type FALL;
+		explode LegUR type FALL;
+		explode HandR type FALL;
+		explode HandL type FALL;
+		explode FootL type FALL;
+		explode FootR type FALL;
+		explode LegLL type FALL;
+		explode LegLR type FALL;
+	}
+	else if( damagetype == 2 )
+	{
+		var Func_Var_4;
+		corpsetype = 1;
+		Func_Var_4 = 0;
+		while( Func_Var_4 < 3 )
+		{
+			emit-sfx 256 | 4 from HandL;
+			emit-sfx 256 | 4 from HandR;
+			emit-sfx 256 | 4 from Head;
+			++Func_Var_4;
+			sleep 480;
+		}
+	}
+	else
+	{
+		corpsetype = 1;
+	}
+	return;
+}

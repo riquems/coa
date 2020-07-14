@@ -1,0 +1,14 @@
+[tarsiege_dead]
+{
+	blocking = 1;
+	damage = 8500;
+	description = Debris;
+	featuredead = npcwreck4x4;
+	footprintx = 4;
+	footprintz = 4;
+	height = 30;
+	isbuilding = 1;
+	object = arasiege_dead;
+	reclaimable = 1;
+	world = All Worlds;
+}

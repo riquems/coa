@@ -1,0 +1,29 @@
+Rivendel Warrior  v1  29 Aug 2006
+
+This unit is for the Lord of the Rings Conflict of Arda mod by Red Warlord. It is in the Galadrim race and is built in the 
+Rivendel Barracks. 
+
+Its role is very simple: it fulfils Rivendel's lack of melee infantry. It looks similar to the Rivendel Archer, but with a 
+curved Elven Blade instead of a Bow. He is a capable warrior, much like any Elf and can easily take on Orcs, Goblins 
+and Men in a one-on-one situation. However, they are expensive and this can be exploited by swarming small groups 
+of them, so he needs support from the Rivendel Archers to be used effectively. 
+
+Installation:
+
+If you have the TAK Switcher by Pocket_Geek (highly recommended), simply unzip RivendelWarrior.txt and 
+RivendelWarrior.ufo into (C:\CAVEDOG\KINGDOMS\units). Launch the Switcher and select the unit from the units 
+menu. Then launch Kingdoms and enjoy!
+
+Alternatively, if you do not have the Switcher, or do not want to use it, follow these simple steps: 
+1)Unzip the 'RivendelWarrior.ufo' to your TAK directory (C:\CAVEDOG\KINGDOMS) 
+2)You will need a special shortcut to make this work. If you have 
+  not already created one, follow these simple steps:
+	1. Create a shortcut to Kingdoms.
+   	2. Right-click on it and select 'Properties'.
+   	3. append ' -disablecavedogverification' (without the quotes) to the 'Target' field.
+   	4. Click 'OK'.
+   	5. Rename your shortcut to "Kingdoms with mods" or anything similar.
+3) Enter Kingdoms via your modified shortcut and enjoy!
+
+Arven		arven04@hotmail.com
+Have Fun!	www.angelfire.com/psy/arven

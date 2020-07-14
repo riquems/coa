@@ -1,0 +1,18 @@
+[tarevilwall]
+{
+	world=allworld;
+	description=Stone Wall;
+	category=Wall;
+	object=tarevilwall;
+	featuredead = npcwreck2x2;
+	footprintx=2;
+	footprintz=2;
+	height=45;
+	blocking=1;
+	hitdensity=5;
+	damage=25000;
+	reclaimable=0;
+	autoreclaimable=0;
+	isbuilding=1;
+	nodrawundergray=1;
+}

@@ -1,0 +1,283 @@
+#define TAK			// This is a TAK script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  emitbuild, keepbody, damage1, damage2, damage3, damage4, damage5, damage6,
+       damage7, damage8, Flag1, Flag2, Flag3, DoorL, DoorR, crystal,
+       flagrot, buildrot, buildpad;
+
+static-var  buildangle, winddir;
+
+// Smoke and Flame definitions
+#define MAX_DAMAGE_FLAMES				8 // You must have this number of damage pieces
+#define MAX_SMOKE_PUFFS_PER_SECOND			5
+#define MAX_DAMAGE_FLAME_LEVEL				3
+
+// Signal definitions
+#define SIG_WIND			2
+
+#include "FlameUnit.h"
+#include "SmokeUnit.h"
+#include "Yard.h"
+
+flag()
+{
+	while( TRUE )
+	{
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <4.923077> speed <67.434066>;
+			turn Flag2 to y-axis <-15.115385> speed <48.170330>;
+			turn Flag3 to y-axis <-18.631868> speed <48.170330>;
+			sleep 73;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <10.197802> speed <68.500000>;
+			turn Flag2 to y-axis <-12.659341> speed <31.967033>;
+			turn Flag3 to y-axis <-15.472527> speed <41.098901>;
+			sleep 77;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <15.120879> speed <62.313187>;
+			turn Flag2 to y-axis <-10.197802> speed <31.153846>;
+			turn Flag3 to y-axis <-12.659341> speed <35.609890>;
+			sleep 79;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <18.285714> speed <41.637363>;
+			turn Flag2 to y-axis <0.000000> speed <134.181319>;
+			turn Flag3 to y-axis <-10.192308> speed <32.384615>;
+			sleep 76;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <15.120879> speed <41.637363>;
+			turn Flag2 to y-axis <4.923077> speed <64.774725>;
+			turn Flag3 to y-axis <0.000000> speed <134.181319>;
+			sleep 76;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <10.901099> speed <54.098901>;
+			turn Flag2 to y-axis <10.192308> speed <67.620879>;
+			turn Flag3 to y-axis <5.626374> speed <72.131868>;
+			sleep 78;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <5.274725> speed <73.065934>;
+			turn Flag2 to y-axis <15.472527> speed <68.500000>;
+			turn Flag3 to y-axis <10.549451> speed <63.934066>;
+			sleep 77;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <0.000000> speed <69.401099>;
+			turn Flag2 to y-axis <18.631868> speed <41.637363>;
+			turn Flag3 to y-axis <15.120879> speed <60.148352>;
+			sleep 76;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <-4.923077> speed <63.115385>;
+			turn Flag2 to y-axis <15.120879> speed <45.082418>;
+			turn Flag3 to y-axis <18.631868> speed <45.082418>;
+			sleep 78;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <-10.192308> speed <68.500000>;
+			turn Flag2 to y-axis <12.659341> speed <31.967033>;
+			turn Flag3 to y-axis <15.120879> speed <45.664835>;
+			sleep 77;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <-15.472527> speed <67.620879>;
+			turn Flag2 to y-axis <10.197802> speed <31.554945>;
+			turn Flag3 to y-axis <12.659341> speed <31.554945>;
+			sleep 78;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <-18.285714> speed <36.532967>;
+			turn Flag2 to y-axis <0.000000> speed <132.434066>;
+			turn Flag3 to y-axis <10.549451> speed <27.401099>;
+			sleep 77;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <-15.472527> speed <36.532967>;
+			turn Flag2 to y-axis <-4.923077> speed <63.934066>;
+			turn Flag3 to y-axis <0.000000> speed <137.005495>;
+			sleep 77;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <-10.895604> speed <59.368132>;
+			turn Flag2 to y-axis <-10.549451> speed <73.065934>;
+			turn Flag3 to y-axis <-4.923077> speed <63.934066>;
+			sleep 77;
+		}
+		if( TRUE )
+		{
+			turn Flag1 to y-axis <-5.269231> speed <72.131868>;
+			turn Flag2 to y-axis <-15.115385> speed <58.604396>;
+			turn Flag3 to y-axis <-10.901099> speed <76.637363>;
+			sleep 78;
+		}
+		turn Flag1 to y-axis <0.000000> speed <2637.362637>;
+		turn Flag2 to y-axis <-18.631868> speed <1758.241758>;
+		turn Flag3 to y-axis <-15.120879> speed <2109.890110>;
+		sleep 2;
+	}
+	return;
+}
+
+startbuild()
+{
+	if( TRUE )
+	{
+		turn DoorL to y-axis <38.005495> speed <76.939560>;
+		turn DoorR to y-axis <-38.005495> speed <76.939560>;
+		sleep 494;
+	}
+	if( TRUE )
+	{
+		move crystal to z-axis [18.000000] speed [11.015912];
+		turn DoorL to y-axis <90.021978> speed <31.829670>;
+		turn DoorR to y-axis <-90.021978> speed <31.829670>;
+		sleep 1634;
+	}
+	sleep 12;
+	return;
+}
+
+stopbuild()
+{
+	if( TRUE )
+	{
+		move crystal to z-axis [0.000000] speed [13.412811];
+		turn DoorL to y-axis <18.000000> speed <53.659341>;
+		turn DoorR to y-axis <-18.000000> speed <53.659341>;
+		sleep 1342;
+	}
+	if( TRUE )
+	{
+		turn DoorL to y-axis <0.000000> speed <27.956044>;
+		turn DoorR to y-axis <0.000000> speed <27.956044>;
+		sleep 644;
+	}
+	sleep 10;
+	return;
+}
+
+Go()
+{
+	dont-cache crystal;
+	call-script startbuild();
+	call-script OpenYard();
+	set INBUILDSTANCE to 1;
+	return;
+}
+
+Stop()
+{
+	set INBUILDSTANCE to 0;
+	call-script CloseYard();
+	call-script stopbuild();
+	cache crystal;
+	return;
+}
+#define ACTIVATECMD			call-script Go();
+#define DEACTIVATECMD		call-script Stop();
+#include "StateChg.h"
+
+Create()
+{
+	dont-cache Flag1;
+	dont-cache Flag2;
+	dont-cache Flag3;
+	dont-cache flagrot;
+	dont-shade Flag1;
+	dont-shade Flag2;
+	dont-shade Flag3;
+	dont-shade flagrot;
+	winddir = 0;
+	buildangle = get ORIENTATION;
+	turn buildrot to y-axis <180.043956> - buildangle now;
+	dont-shade buildpad;
+	dont-shadow buildpad;
+	while ( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+	dont-cache buildpad;
+	dont-cache emitbuild;
+	//call-script InitState();
+	//start-script DamageFlameControl();
+	//start-script SmokeControl();
+	//start-script flag();
+	return;
+}
+
+WindChange(windspeed, winddirection)
+{
+	signal SIG_WIND;
+	set-signal-mask SIG_WIND;
+	winddir = winddirection;
+	turn flagrot to y-axis winddir speed <50.010989>;
+	return;
+}
+
+Activate()
+{
+	start-script RequestState(0);
+	return;
+}
+
+Deactivate()
+{
+	start-script RequestState(1);
+	return;
+}
+
+StartBuilding()
+{
+	sleep 100;
+	return;
+}
+
+StopBuilding()
+{
+	sleep 100;
+	return;
+}
+
+QueryBuildInfo(piecenum)
+{
+	piecenum = emitbuild;
+	return;
+}
+
+SweetSpot(piecenum)
+{
+	piecenum = keepbody;
+	return;
+}
+
+Killed(severity, corpsetype, damagetype)
+{
+	corpsetype = 1;
+	explode damage1 type EXPTYPE_MEDIUMSMOKE | BITMAPONLY;
+	explode damage2 type EXPTYPE_MEDIUMSMOKE | BITMAPONLY;
+	explode damage3 type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+	explode damage4 type EXPTYPE_XLARGEEXPLOSION | BITMAPONLY;
+	explode damage5 type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+	explode damage6 type EXPTYPE_XLARGEEXPLOSION | BITMAPONLY;
+	return;
+}

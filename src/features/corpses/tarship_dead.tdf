@@ -1,0 +1,16 @@
+[tarship_dead]
+{
+	blocking = 1;
+	category = corpse;
+	damage = 8052;
+	decomposetime = 600;
+	description = Wreckage;
+	footprintx = 4;
+	footprintz = 4;
+	height = 0;
+	hitdensity = 97;
+	isbuilding = 1;
+	object = tarship_dead;
+	reclaimable = 1;
+	world = All Worlds;
+}

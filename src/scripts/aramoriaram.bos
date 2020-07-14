@@ -1,0 +1,426 @@
+#define TAK			// This is a TAK script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  emitwpn1, emitwpn2, emitwpn3, emitwpn4, base, emitjim1, damage1, Bolt,
+       ArmL, ArmR, StringR, StringL, wake1, wake2, wake3, wake4,
+       wheel1, wheel2, wheel3, wheel4, vet_5, vet_10, turret;
+
+static-var  moving, busy_dying, Static_Var_3, direction, Static_Var_5,
+            vetlevel, Static_Var_7;
+
+// Smoke and Flame definitions
+#define MAX_DAMAGE_FLAMES				1 // You must have this number of damage pieces
+#define MAX_SMOKE_PUFFS_PER_SECOND			5
+
+// Signal definitions
+#define SIG_AIM				2
+#define SIG_MOVE			4
+#define SIG_ROLL			8
+
+#include "SmokeUnit.h"
+
+attack1(weapon)
+{
+	if( !Static_Var_3 )
+	{
+		move Bolt to z-axis [2.450000] now;
+		turn ArmL to y-axis <-18.000000> now;
+		turn ArmR to y-axis <18.000000> now;
+		turn StringR to y-axis <-33.005495> now;
+		turn StringL to y-axis <33.005495> now;
+		play-sound( "CATAPUL6", PLAYSOUND_PRIORITY_BATTLE );
+		sleep 90;
+	}
+	if( !Static_Var_3 )
+	{
+		move Bolt to z-axis [7.025000] now;
+		turn ArmL to y-axis <-40.005495> now;
+		turn ArmR to y-axis <40.005495> now;
+		turn StringR to y-axis <-73.016484> now;
+		turn StringL to y-axis <73.016484> now;
+		sleep 90;
+	}
+	if( !Static_Var_3 )
+	{
+		move Bolt to z-axis [14.000000] now;
+		turn ArmL to y-axis <-50.010989> now;
+		turn ArmR to y-axis <50.010989> now;
+		turn StringR to y-axis <-98.021978> now;
+		turn StringL to y-axis <98.021978> now;
+		hide Bolt;
+		set WEAPON_LAUNCH_NOW to weapon;
+		sleep 90;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <-40.005495> now;
+		turn ArmR to y-axis <40.005495> now;
+		turn StringR to y-axis <-89.016484> now;
+		turn StringL to y-axis <89.016484> now;
+		sleep 90;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <-30.005495> now;
+		turn ArmR to y-axis <30.005495> now;
+		turn StringR to y-axis <-80.016484> now;
+		turn StringL to y-axis <80.016484> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn StringR to y-axis <-77.016484> now;
+		turn StringL to y-axis <77.016484> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn StringR to y-axis <-74.016484> now;
+		turn StringL to y-axis <74.016484> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <-29.005495> now;
+		turn ArmR to y-axis <29.005495> now;
+		turn StringR to y-axis <-62.510989> now;
+		turn StringL to y-axis <62.510989> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <-28.005495> now;
+		turn ArmR to y-axis <28.005495> now;
+		turn StringR to y-axis <-51.010989> now;
+		turn StringL to y-axis <51.010989> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <-21.000000> now;
+		turn ArmR to y-axis <21.000000> now;
+		turn StringR to y-axis <-38.258242> now;
+		turn StringL to y-axis <38.258242> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <-14.000000> now;
+		turn ArmR to y-axis <14.000000> now;
+		turn StringR to y-axis <-25.505495> now;
+		turn StringL to y-axis <25.505495> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <-7.000000> now;
+		turn ArmR to y-axis <7.000000> now;
+		turn StringR to y-axis <-12.752747> now;
+		turn StringL to y-axis <12.752747> now;
+		sleep 100;
+	}
+	if( !Static_Var_3 )
+	{
+		turn ArmL to y-axis <0.000000> now;
+		turn ArmR to y-axis <0.000000> now;
+		turn StringR to y-axis <0.000000> now;
+		turn StringL to y-axis <0.000000> now;
+		sleep 10;
+	}
+	move Bolt to z-axis [0.000000] now;
+	show Bolt;
+	return;
+}
+
+MoveWatcher()
+{
+	set-signal-mask SIG_MOVE;
+	while( TRUE )
+	{
+		moving = get CURRENT_SPEED > 5 OR direction;
+		sleep 100;
+	}
+	return;
+}
+
+WakeControl()
+{
+	while( TRUE )
+	{
+		if( moving AND get IN_WATER )
+		{
+			emit-sfx 2 from wake1;
+			sleep 60;
+			emit-sfx 2 from wake2;
+			sleep 60;
+			emit-sfx 2 from wake3;
+			sleep 60;
+			emit-sfx 2 from wake4;
+			sleep 60;
+		}
+		else
+		{
+			sleep 500;
+		}
+	}
+	return;
+}
+
+SuperDynamicWheelSpinner(Func_Var_1, Func_Var_2, Func_Var_3, Func_Var_4, Func_Var_5)
+{
+	Func_Var_1 = 1;
+	while( TRUE )
+	{
+		if( moving )
+		{
+			Static_Var_5 = get UNKNOWN_UNIT_VALUE(33);
+			Func_Var_2 = 1;
+			Func_Var_3 = 1;
+			if( Static_Var_5 > 910 )
+			{
+				Func_Var_2 = 5;
+			}
+			if( Static_Var_5 < -910 )
+			{
+				Func_Var_3 = 5;
+			}
+			Func_Var_4 = get CURRENT_SPEED * 100 / 55 * Func_Var_2;
+			Func_Var_5 = get CURRENT_SPEED * 100 / 55 * Func_Var_3;
+			spin wheel1 around x-axis speed Func_Var_4 * <1.000000>;
+			spin wheel2 around x-axis speed Func_Var_4 * <1.000000>;
+			spin wheel3 around x-axis speed Func_Var_5 * <1.000000>;
+			spin wheel4 around x-axis speed Func_Var_5 * <1.000000>;
+			Func_Var_1 = 0;
+			sleep 100;
+		}
+		else if( !Func_Var_1 )
+		{
+			stop-spin wheel1 around x-axis;
+			stop-spin wheel2 around x-axis;
+			stop-spin wheel3 around x-axis;
+			stop-spin wheel4 around x-axis;
+			Func_Var_1 = 1;
+			sleep 100;
+		}
+		else
+		{
+			sleep 100;
+		}
+	}
+	return;
+}
+
+StatusControl()
+{
+	var Func_Var_1;
+	Func_Var_1 = 0;
+	while( Func_Var_1 < 2 )
+	{
+		vetlevel = get VETERAN_LEVEL;
+		if( Func_Var_1 == 0 )
+		{
+			if( vetlevel > 4 )
+			{
+				show vet_5;
+				++Func_Var_1;
+			}
+		}
+		else if( Func_Var_1 == 1 )
+		{
+			if( vetlevel > 9 )
+			{
+				show vet_10;
+				++Func_Var_1;
+			}
+		}
+		sleep 1000;
+	}
+	return;
+}
+
+Create()
+{
+	hide vet_5;
+	hide vet_10;
+	move emitjim1 to x-axis [0.000000] now;
+	move emitjim1 to y-axis [43.000000] now;
+	move emitjim1 to z-axis [12.000000] now;
+	moving = FALSE;
+	busy_dying = FALSE;
+	Static_Var_3 = 0;
+	direction = 0;
+	Static_Var_5 = 0;
+	vetlevel = 0;
+	Static_Var_7 = 0;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+	start-script MoveWatcher();
+	start-script WakeControl();
+	start-script SmokeControl();
+	start-script StatusControl();
+	start-script SuperDynamicWheelSpinner();
+	return;
+}
+
+HitByWeapon(attacker, pitch, roll, severity)
+{
+	var Func_Var_5, Func_Var_6, Func_Var_7, Func_Var_8;
+	if( severity > 10 AND attacker != 4 )
+	{
+		if( severity > 400 )
+		{
+			severity = TRUE;
+		}
+		Func_Var_5 = pitch * severity / 300;
+		Func_Var_6 = roll * severity / 200;
+		Func_Var_7 = pitch * ( 0 - 1 ) * severity / 600;
+		Func_Var_8 = roll * ( 0 - 1 ) * severity / 400;
+		signal SIG_ROLL;
+		set-signal-mask SIG_ROLL;
+		turn base to x-axis Func_Var_5 speed <1.000000> * <0.439560>;
+		turn base to z-axis Func_Var_6 speed <1.000000> * <0.439560>;
+		wait-for-turn base around x-axis;
+		wait-for-turn base around z-axis;
+		turn base to x-axis Func_Var_7 speed <0.500000> * <0.439560>;
+		turn base to z-axis Func_Var_8 speed <0.500000> * <0.439560>;
+		wait-for-turn base around x-axis;
+		wait-for-turn base around z-axis;
+		turn base to x-axis <0.000000> speed <0.247253> * <0.439560>;
+		turn base to z-axis <0.000000> speed <0.247253> * <0.439560>;
+	}
+	return;
+}
+
+TurnDirection(dir)
+{
+	direction = dir;
+	return;
+}
+
+AimWeapon(heading, pitch, weaponnum)
+{
+	if( weaponnum > 0 )
+	{
+		if( Static_Var_7 > 4 )
+		{
+			set WEAPON_READY to 1;
+			set WEAPON_LAUNCH_NOW to 1;
+			play-sound( "ARROW01", PLAYSOUND_PRIORITY_BATTLE );
+			Static_Var_7 = 0;
+		}
+		else
+		{
+			++Static_Var_7;
+		}
+	}
+	else
+	{
+		signal SIG_AIM;
+		set-signal-mask SIG_AIM;
+		turn turret to x-axis <0.000000> - pitch speed <40.005495>;
+		turn turret to y-axis heading + <180.043956> speed <60.010989>;
+		wait-for-turn turret around x-axis;
+		wait-for-turn turret around y-axis;
+		set WEAPON_READY to 0;
+	}
+	return;
+}
+
+FireWeapon(weaponnum)
+{
+	if( weaponnum == 0 )
+	{
+		call-script attack1(0);
+	}
+	return;
+}
+
+TargetCleared(weaponnum)
+{
+	if( weaponnum == 0 )
+	{
+		set WEAPON_AIM_ABORTED to 0;
+	}
+	return;
+}
+
+QueryWeapon(piecenum, weaponnum)
+{
+	if( weaponnum > 0 )
+	{
+		piecenum = Rand( 0, 3 );
+	}
+	else
+	{
+		piecenum = emitjim1;
+	}
+	return;
+}
+
+SweetSpot(piecenum)
+{
+	piecenum = base;
+	return;
+}
+
+Dying(damagetype)
+{
+	set-signal-mask 0;
+	signal SIG_AIM;
+	signal SIG_MOVE;
+	signal SIG_ROLL;
+	moving = FALSE;
+	busy_dying = TRUE;
+	if( Rand( 1, 4 ) == 1 )
+	{
+		play-sound( "ARASIEGEDIE1", PLAYSOUND_PRIORITY_BATTLE );
+	}
+	explode Bolt type EXPTYPE_BLOODEXPLOSION | BITMAPONLY;
+	explode base type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+	set FINISHED_DYING to 1;
+	return;
+}
+
+Killed(severity, corpsetype, damagetype)
+{
+	if( damagetype == 3 )
+	{
+		corpsetype = 0;
+		explode turret type FALL;
+		explode ArmR type FALL;
+		explode wheel1 type FALL;
+		explode wheel2 type FALL;
+		explode wheel3 type FALL;
+		explode wheel4 type FALL;
+		explode base type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+		explode ArmL type 32768 | BITMAPONLY;
+		explode Bolt type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+		explode Bolt type EXPTYPE_BLOODEXPLOSION | BITMAPONLY;
+	}
+	else if( damagetype == 2 )
+	{
+		var Func_Var_4;
+		corpsetype = 1;
+		Func_Var_4 = 0;
+		while( Func_Var_4 < 3 )
+		{
+			emit-sfx 256 | 5 from emitwpn1;
+			emit-sfx 256 | 5 from emitwpn2;
+			emit-sfx 256 | 5 from emitwpn3;
+			emit-sfx 256 | 5 from emitwpn4;
+			explode Bolt type EXPTYPE_BLOODEXPLOSION | BITMAPONLY;
+			explode base type EXPTYPE_XLARGESMOKE | BITMAPONLY;
+			++Func_Var_4;
+			sleep 480;
+		}
+	}
+	else
+	{
+		corpsetype = 1;
+	}
+	return;
+}

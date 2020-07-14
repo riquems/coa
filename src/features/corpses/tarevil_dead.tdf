@@ -1,0 +1,17 @@
+[tarevil_dead]
+{
+	animatable = 1;
+	blocking = 0;
+	damage = 10;
+	decomposetime = 1;
+	description = Corpse;
+	footprintx = 2;
+	footprintz = 2;
+	height = 0;
+	hitdensity = 1;
+	noshadow = 1;
+	object = tarevil_dead;
+	reclaimable = 1;
+	resurrectable = 1;
+	world = All Worlds;
+}
