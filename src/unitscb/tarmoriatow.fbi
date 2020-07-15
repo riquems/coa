@@ -30,7 +30,6 @@
 	soundcategory = TARMAGE;
 	soundclass = TARMAGE;
 	tedclass = Taros;
-	totalallowed = 10;
 	unitname = tarmoriatow;
 	unitnumber = 35;
 	version = 1;

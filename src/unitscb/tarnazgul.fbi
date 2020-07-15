@@ -47,7 +47,6 @@
 	standingunitorder = 2;
 	stone = tarknigh_stone;
 	tedclass = Taros;
-	totalallowed = 8;
 	transmaxunits = 1;
 	turninplacerate = 1000;
 	turnrate = 200;

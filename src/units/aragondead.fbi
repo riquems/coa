@@ -35,7 +35,6 @@
 	soundcategory = TARCASTL;
 	soundclass = TARCASTL;
 	tedclass = Aramon;
-	totalallowed = 2;
 	unitname = aragondead;
 	unitnumber = 136;
 	unitstandorders = 0;

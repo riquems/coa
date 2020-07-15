@@ -50,7 +50,7 @@
 	standingunitorder = 2;
 	stone = tarbeak_stone;
 	tedclass = Aramon;
-	totalallowed = 8;
+	totalallowed = 1;
 	transmaxunits = 1;
 	transportcapacity = 1;
 	transportdistance = 300;

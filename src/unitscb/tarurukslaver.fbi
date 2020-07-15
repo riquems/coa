@@ -46,7 +46,6 @@
 	standingunitorder = 1;
 	stone = arabuild_stone;
 	tedclass = Taros;
-	totalallowed = 5;
 	turninplacerate = 2500;
 	turnrate = 2500;
 	unitname = tarurukslaver;

@@ -35,7 +35,6 @@
 	soundcategory = ARACASTL;
 	soundclass = ARACASTL;
 	tedclass = Aramon;
-	totalallowed = 3;
 	unitname = ararohhall;
 	unitnumber = 7;
 	unitstandorders = 0;

@@ -38,7 +38,6 @@
 	standingunitorder = 2;
 	stone = zonorc_stone;
 	tedclass = Taros;
-	totalallowed = 3;
 	turninplacerate = 2000;
 	turnrate = 2000;
 	unitname = tartrollchief;

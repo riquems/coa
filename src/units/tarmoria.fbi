@@ -35,7 +35,6 @@
 	soundcategory = VERKEEP;
 	soundclass = VERKEEP;
 	tedclass = Taros;
-	totalallowed = 5;
 	unitname = tarmoria;
 	unitnumber = 136;
 	unitstandorders = 0;

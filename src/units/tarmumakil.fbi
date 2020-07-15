@@ -43,7 +43,6 @@
 	transportdistance = 200;
 	transportsize = 5;
 	transportsizecapacity = 32;
-	totalallowed = 10;
 	turninplacerate = 1200;
 	turnrate = 150;
 	unitname = tarmumakil;

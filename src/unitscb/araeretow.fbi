@@ -30,7 +30,6 @@
 	soundcategory = VERAT;
 	soundclass = VERAT;
 	tedclass = Aramon;
-	totalallowed = 10;
 	unitname = araeretow;
 	unitnumber = 35;
 	version = 1;

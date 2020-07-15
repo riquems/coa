@@ -30,7 +30,6 @@
 	soundcategory = VERAT;
 	soundclass = VERAT;
 	tedclass = Aramon;
-	totalallowed = 15;
 	unitname = aragontower;
 	unitnumber = 35;
 	version = 1;

@@ -35,7 +35,6 @@
 	soundcategory = VERKEEP;
 	soundclass = VERKEEP;
 	tedclass = Aramon;
-	totalallowed = 3;
 	unitname = aramirkbar;
 	unitnumber = 136;
 	unitstandorders = 0;

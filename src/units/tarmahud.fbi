@@ -39,7 +39,6 @@
 	standingunitorder = 2;
 	stone = arabroad_stone;
 	tedclass = Taros;
-	totalallowed = 5;
 	turninplacerate = 2500;
 	turnrate = 2500;
 	unitname = tarmahud;

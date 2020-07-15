@@ -35,7 +35,6 @@
 	soundcategory = VERKEEP;
 	soundclass = VERKEEP;
 	tedclass = Taros;
-	totalallowed = 3;
 	unitname = tarharadbar;
 	unitnumber = 136;
 	unitstandorders = 0;
